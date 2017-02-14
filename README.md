@@ -58,6 +58,8 @@ released under the MIT or BSD license.
 
 Enjoy!
 
+Designed by Dmitry C.
+
 [1]:  https://symfony.com/doc/2.8/book/installation.html
 [6]:  https://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/index.html
 [7]:  https://symfony.com/doc/2.8/book/doctrine.html
