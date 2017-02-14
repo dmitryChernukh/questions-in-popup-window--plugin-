@@ -1,0 +1,333 @@
+<script type="text/javascript" src="{{ asset('app/js/jquery-1.9.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/render.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/turbotabs.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jquery.validate.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/subsidiary.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning back-button-popup">Back</button></div>
+
+        <div id="main-block">
+            <div id="info-block">
+
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <strong>Info!</strong>
+                    Some attributes will take effect only when you save / rebuild the changes.
+                </div>
+
+                <form class="pure-form pure-form-aligned" action="{{ url('homepage')  }}saveCurrentPopUpForm" method="post" id="set-parameter-form">
+                    <fieldset>
+                        <div class="pure-control-group">
+                            <label for="id">PopUp ID</label>
+                            <input id="id" type="text" placeholder="Id" name="id" value="{{ id }}" readonly>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="name">Name</label>
+                            <input id="name" type="text" placeholder="Name" name="name" value="{{ name }}" readonly>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="height">Height</label>
+                            <input id="height" type="number" placeholder="number" name="height" value="{{ height }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="width">Width</label>
+                            <input id="width" type="number" name="width" placeholder="width" value="{{ width }}">
+                        </div>
+
+                        {#------------------#}
+                        <div class="pure-control-group">
+                            <label for="pictureWidth">PictureWidth</label>
+                            <input id="pictureWidth" type="number" name="pictureWidth" placeholder="pictureWidth" value="{{ pictureWidth }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="pictureTopMargin">PictureTopMargin</label>
+                            <input id="pictureTopMargin" type="number" name="pictureTopMargin" placeholder="pictureTopMargin" value="{{ pictureTopMargin }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="pictureBorderRadius">PictureBorderRadius</label>
+                            <input id="pictureBorderRadius" type="number" name="pictureBorderRadius" placeholder="pictureBorderRadius" value="{{ pictureBorderRadius }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="pictureOpacity">PictureOpacity Range: 0 - 1. Step - 0.1.</label>
+                            <input id="pictureOpacity" type="text" name="pictureOpacity" placeholder="pictureOpacity" value="{{ pictureOpacity }}">
+                        </div>
+                        {#------------------#}
+
+                        <div class="pure-control-group">
+                            <label for="bgColor">BGColor</label>
+                            <input class="rgb-select" id="bgColor" type="text" name="bgColor" placeholder="BGColor" value="{{ bgColor }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="buttonColor">ButtonColor</label>
+                            <input class="rgb-select" id="buttonColor" type="text" name="buttonColor" placeholder="buttonColor" value="{{ buttonColor }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="buttonColor">ButtonTextColor</label>
+                            <input class="rgb-select" id="buttonTextColor" type="text" name="buttonTextColor" placeholder="buttonTextColor" value="{{ buttonTextColor }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="image">BorderStyle</label>
+                            <select id="borderStyle" name="borderStyle">
+                                <option value="3" {% if borderStyle.id == 3 %}
+                                    selected="selected"
+                                {% endif %}>none</option>
+                                <option value="2" {% if borderStyle.id == 2 %}
+                                    selected="selected"
+                                        {% endif %}>hidden</option>
+                                <option value="1" {% if borderStyle.id == 1 %}
+                                    selected="selected"
+                                        {% endif %}>dotted</option>
+                                <option value="4" {% if borderStyle.id == 4 %}
+                                    selected="selected"
+                                        {% endif %}>dashed</option>
+                                <option value="5" {% if borderStyle.id == 5 %}
+                                    selected="selected"
+                                        {% endif %}>solid</option>
+                                <option value="6" {% if borderStyle.id == 6 %}
+                                    selected="selected"
+                                        {% endif %}>double</option>
+                                <option value="7" {% if borderStyle.id == 7 %}
+                                    selected="selected"
+                                        {% endif %}>groove</option>
+                                <option value="8" {% if borderStyle.id == 8 %}
+                                    selected="selected"
+                                        {% endif %}>ridge</option>
+                                <option value="9" {% if borderStyle.id == 9 %}
+                                    selected="selected"
+                                        {% endif %}>inset</option>
+                                <option value="10" {% if borderStyle.id == 10 %}
+                                    selected="selected"
+                                        {% endif %}>outset</option>
+                            </select>
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="textColor">TextColor</label>
+                            <input class="rgb-select" id="textColor" type="text" name="textColor" placeholder="textColor" value="{{ textColor }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="ButtonBorderColor">Button - border color</label>
+                            <input class="rgb-select" id="ButtonBorderColor" type="text" name="ButtonBorderColor" placeholder="ButtonBorderColor" value="{{ buttonColorBorder }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="borderRadius">BorderRadius</label>
+                            <input class="" id="borderRadius" type="number" name="borderRadius" placeholder="borderRadius" value="{{ borderRadius }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="borderColour">BorderColour</label>
+                            <input class="rgb-select" id="borderColour" type="text" name="borderColour" placeholder="borderColour" value="{{ borderColour }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="borderWidth">BorderWidth(px)</label>
+                            <input class="" id="borderWidth" type="number" name="borderWidth" placeholder="borderWidth" value="{{ borderWidth }}">
+                        </div>
+                        <div class="pure-control-group">
+                            <label for="mainQuestionTextSize">MainQuestion TextSize(pt)</label>
+                            <input class="" id="mainQuestionTextSize" type="number" name="mainQuestionTextSize" placeholder="mainQuestionTextSize" value="{{ mainQuestionTextSize }}">
+                        </div>
+
+                        {#------------------#}
+
+                        <div class="pure-control-group">
+                            <label for="lineHeight">Main Question Line Height</label>
+                            <input class="" id="lineHeight" type="number" name="lineHeight" placeholder="lineHeight" value="{{ lineHeight }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="textTopMargin">Main Question Margin Top</label>
+                            <input class="" id="textTopMargin" type="number" name="textTopMargin" placeholder="textTopMargin" value="{{ textTopMargin }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="letterSpacing">LetterSpacing</label>
+                            <input class="" id="letterSpacing" type="number" name="letterSpacing" placeholder="letterSpacing" value="{{ letterSpacing }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="fontStyle">FontStyle</label>
+                            <select id="fontStyle" name="fontStyle">
+                                <option value="normal" {% if fontStyle == 'normal' %}
+                                    selected="selected"
+                                        {% endif %}>normal</option>
+                                <option value="italic" {% if fontStyle == 'italic' %}
+                                    selected="selected"
+                                        {% endif %}>italic</option>
+                                <option value="oblique" {% if fontStyle == 'oblique' %}
+                                    selected="selected"
+                                        {% endif %}>oblique</option>
+                            </select>
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="fontWeight">FontWeight</label>
+                            <select id="fontWeight" name="fontWeight">
+                                <option value="100" {% if fontWeight == '100' %}
+                                    selected="selected"
+                                        {% endif %}>100</option>
+                                <option value="200" {% if fontWeight == '200' %}
+                                    selected="selected"
+                                        {% endif %}>200</option>
+                                <option value="300" {% if fontWeight == '300' %}
+                                    selected="selected"
+                                        {% endif %}>300</option>
+                                <option value="400" {% if fontWeight == '400' %}
+                                    selected="selected"
+                                        {% endif %}>400</option>
+                                <option value="500" {% if fontWeight == '500' %}
+                                    selected="selected"
+                                        {% endif %}>500</option>
+                                <option value="600" {% if fontWeight == '600' %}
+                                    selected="selected"
+                                        {% endif %}>600</option>
+                                <option value="700" {% if fontWeight == '700' %}
+                                    selected="selected"
+                                        {% endif %}>700</option>
+                                <option value="800" {% if fontWeight == '800' %}
+                                    selected="selected"
+                                        {% endif %}>800</option>
+                                <option value="900" {% if fontWeight == '900' %}
+                                    selected="selected"
+                                        {% endif %}>900</option>
+                            </select>
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="answersContainerMarginTop">Answers Container MarginTop</label>
+                            <input class="" id="answersContainerMarginTop" type="number" name="answersContainerMarginTop" placeholder="answersContainerMarginTop" value="{{ answersContainerMarginTop }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="answersTextSize">Answers TextSize(pt)</label>
+                            <input class="" id="answersTextSize" type="number" name="answersTextSize" placeholder="answersTextSize" value="{{ answersTextSize }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="SpaceBetweenButtons">Space between buttons</label>
+                            <input class="" id="SpaceBetweenButtons" type="number" name="buttonSpace" placeholder="buttonSpace" value="{{ buttonSpace }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="ButtonBorderRadius">Button Border Radius</label>
+                            <input class="" id="ButtonBorderRadius" type="number" name="ButtonBorderRadius" placeholder="ButtonBorderRadius" value="{{ buttonBorderRadius }}">
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="ButtonTextAlign">Button Text Align</label>
+                            <select id="ButtonTextAlign" name="ButtonTextAlign">
+                                <option value="center" {% if buttonTextAlign == 'center' %} selected="selected" {% endif %}>Center</option>
+                                <option value="left" {% if buttonTextAlign == 'left' %} selected="selected" {% endif %}>Left</option>
+                                <option value="right" {% if buttonTextAlign == 'right' %} selected="selected" {% endif %}>Right</option>
+                            </select>
+
+                        </div>
+
+                        <div class="pure-control-group">
+                            <label for="image">Image</label>
+                            <input class="" id="image" type="text" name="image" placeholder="image" value="{{ image }}" readonly>
+                        </div>
+                        <input type="hidden" name="previousPage" value='{{ previousPage }}' id="prev-page">
+                        <input type="hidden" name="currentPage" value="" id="current-page">
+                    </fieldset>
+                    <div class="pure-control-group">
+                        <label for="image"></label>
+                        <button type="submit" class="pure-button pure-button-primary">Save</button>
+                    </div>
+
+                </form>
+                <div id="mouse_coords_on_move"></div>
+                <div id="mouse_coords_on_click"></div>
+            </div>
+            <div class="pop-up">
+                <div><img class="close-pop-up" src="{{ asset('app/system_image/close-button.png')}}"></div>
+                {% if image %}
+                    <div class="image-container"><img class="header-image" src="/uploads/images/{{ image }}"></div>
+                {% endif %}
+                <div class="main-question">What is more important to you in a poker site?</div>
+
+                <div class="answer-container">
+                    <input type="button" class="button-answer" value="Answer 1">
+                    <input type="button" class="button-answer" value="Answer 2">
+                    <input type="button" class="button-answer" value="Answer 3">
+                </div>
+            </div>
+        </div>
+
+</body>
+<script type="application/javascript">
+
+    $('#current-page').val(window.location.href);
+
+</script>
+<style>
+    .pop-up{
+        height: {{ height }};
+        width: {{ width }};
+        background-color: {{ bgColor }};
+        /*background-image: url(/app/css/bg-images/skulls.png);*/
+        /*background-color: lightseagreen ; !* Цвет фона *!*/
+        color: {{ textColor }};
+        border-radius: {{ borderRadius }}px;
+        border: {{ borderWidth }}px {{ borderStyle.type }} {{ borderColour }};
+        position: fixed;
+        margin-left: 700px;
+    }
+    .button-answer{
+        display: block;
+        line-height: normal;
+        margin: {{ buttonSpace }}px auto;
+        background-color: {{ buttonColor }};
+        font-size: {{ answersTextSize }}pt;
+        border: 1px solid {{ buttonColorBorder }};
+        border-radius: {{ buttonBorderRadius }}px;
+        width: 96%;
+        color: {{ buttonTextColor }};
+        word-wrap: break-word;
+        text-align: {{ buttonTextAlign }};
+        white-space: normal;
+    }
+    .close-pop-up{
+        float: right;
+        position: relative;
+        display: block;
+        margin-left: -26px;
+        margin-right: 8px;
+        margin-top: 8px;
+        margin-bottom: -18px;
+    }
+    .image-container,.answer-container{
+        width:100%;
+    }
+    .answer-container{
+        margin-top: {{ answersContainerMarginTop }}px;
+    }
+    .header-image{
+        margin: 0 auto;
+        display: block;
+        width: {{ pictureWidth }};
+        margin-top: {{ pictureTopMargin }};
+        opacity: {{ pictureOpacity }};
+        border-radius: {{ pictureBorderRadius }}px;
+    }
+    .main-question{
+        font-size: {{ mainQuestionTextSize }}pt;
+        text-align: center;
+        line-height: {{ lineHeight }};
+        margin-top: {{ textTopMargin }};
+        letter-spacing: {{ letterSpacing }};
+        font-style: {{ fontStyle }};
+        font-weight: {{ fontWeight }};
+    }
+
+</style>

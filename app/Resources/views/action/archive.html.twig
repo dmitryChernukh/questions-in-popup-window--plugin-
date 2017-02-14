@@ -1,0 +1,83 @@
+<script type="text/javascript" src="{{ asset('app/js/jquery-1.9.1.min.js') }}"></script>
+
+<script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+
+
+
+<script type="text/javascript" src="{{ asset('app/js/subsidiary.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning btn-back-user-action">Back</button></div>
+
+<div id="main-block">
+        <div id="container-block">
+
+            <div class="alert alert-warning" role="alert">
+                <strong>Archive list!</strong>
+            </div>
+
+            {% for element in popup %}
+
+                {% if(element.archive) == true %}
+
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                {{ element.name }}
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <img src="/app/system_image/archive.png" class="archive-image">
+
+                            PopUp info:<br>
+                            <p>
+                                <b class="ptk">height :</b>  {{ element.height }} <br>
+                                <b class="ptk">width :</b> {{ element.width }} <br>
+                                <b class="ptk">background color :</b> {{ element.bgColor }} <br>
+                                <b class="ptk">button color :</b> {{ element.buttonColor }} <br>
+                                <b class="ptk">button space :</b> {{ element.buttonSpace }} <br>
+                                <b class="ptk">text color :</b> {{ element.textColor }} <br>
+                                <b class="ptk">button color border :</b> {{ element.buttonColorBorder }} <br>
+                                <b class="ptk">button border radius :</b> {{ element.buttonBorderRadius }} <br>
+                                <b class="ptk">button text align :</b> {{ element.buttonTextAlign }} <br>
+                                <b class="ptk">border radius :</b> {{ element.borderRadius }} <br>
+                                <b class="ptk">border colour :</b> {{ element.borderColour }} <br>
+                                <b class="ptk">border width :</b> {{ element.borderWidth }} <br>
+                                <b class="ptk">main question text size :</b> {{ element.mainQuestionTextSize }} <br>
+                                <b class="ptk">answers text size :</b> {{ element.answersTextSize }} <br>
+                                <b class="ptk">answers container margin top :</b> {{ element.answersContainerMarginTop }} <br>
+                                <b class="ptk">url :</b> {{ element.url }} <br>
+                                <b class="ptk">position :</b> {{ element.position }} <br>
+                                <b class="ptk">button text color :</b> {{ element.buttonTextColor }} <br>
+                                <b class="ptk">picture width :</b> {{ element.pictureWidth }} <br>
+                                <b class="ptk">picture top margin :</b> {{ element.pictureTopMargin }} <br>
+                                <b class="ptk">picture border radius :</b> {{ element.pictureBorderRadius }} <br>
+                                <b class="ptk">picture opacity :</b> {{ element.pictureOpacity }} <br>
+                                <b class="ptk">line height :</b> {{ element.lineHeight }} <br>
+                                <b class="ptk">text top margin :</b> {{ element.textTopMargin }} <br>
+                                <b class="ptk">letter spacing :</b> {{ element.letterSpacing }} <br>
+                                <b class="ptk">font style :</b> {{ element.fontStyle }} <br>
+                                <b class="ptk">font weight :</b> {{ element.fontWeight }} <br>
+                            </p>
+
+                            <input type="hidden" value="{{ element.id }}" class="popup-id">
+
+                            <button type="button" class="btn btn-success extract">Recovery</button>
+
+                        </div>
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+    </div>
+
+</body>
+
+
+

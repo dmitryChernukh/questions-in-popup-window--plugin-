@@ -1,0 +1,1565 @@
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="{{ asset('app/js/jquery-1.9.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/turbotabs.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/transition.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/jquery.validate.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/additional-methods.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/switcher.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/controller.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('app/js/secondary-controller.js') }}"></script>
+
+
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/bootstrap.min.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/turbotabs.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/animate.min.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/font-awesome.min.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/switcher.css') }}" />
+    <link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/cogs.css') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<style>
+    .logout-button-etc-m{
+        color: white !important;
+        float: right;
+        margin-top: 5px;
+    }
+</style>
+<div class="head-row">
+
+    <a class="logout-button-etc-m" href="{{ logout_path('main') }}">Logout</a>
+
+    <button type="button" class="btn btn-warning back">Back</button></div>
+{#<div class="head-row"><button type="button" class="btn btn-warning back">Home</button></div>#}
+    <div id="main">
+        <!-- - - - - - Tab navigation - - - - - - -->
+        <ul class="tt_tabs">
+            <li class="{% if active == 'edit-popup' %} active {% endif %}">Edit Popup</li>
+            <li class="{% if active == 'save-question' %} active {% endif %}">Add/Edit Questions</li>
+            <li>Add/Edit Results Popups</li>
+            <li>Edit URL's</li>
+            <li>Display Options</li>
+            <li>Preview</li>
+            {#<li>{{ active }}</li>#}
+        </ul>
+        <!-- - - - - Tab Content - - - - - -->
+        <div class="tt_container">
+            <div class="tt_tab {% if active == 'edit-popup' %} active {% endif %}">
+                <form class="form-horizontal" action="{{ url('homepage')  }}savePopUp" enctype="multipart/form-data" method="post" name="myPopupForm">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-xs-6 col-md-4">
+                                <div class="form-group">
+                                    <label for="id" class="col-sm-5 control-label">ID</label>
+                                    <div class="col-sm-7">
+                                        <input id="id" type="text" class="form-control" value="{{ popUp.id }}" placeholder="ID" name="id" readonly>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-5 control-label">Name</label>
+                                    <div class="col-sm-7">
+                                        <input id="name" type="text" class="form-control" value="{{ popUp.name }}" name="name" placeholder="name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="height" class="col-sm-5 control-label">Height</label>
+                                    <div class="col-sm-7">
+                                        <input id="height" class="form-control" type="number" value="{{ popUp.height }}" name="height">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="width" class="col-sm-5 control-label">Width</label>
+                                    <div class="col-sm-7">
+                                        <input id="width" class="form-control" type="number" value="{{ popUp.width }}" name="width">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bgColor" class="col-sm-5 control-label">BG color</label>
+                                    <div class="col-sm-7">
+                                        <input id="bgColor"  class="form-control rgb-select" type="text"  value="{{ popUp.bgColor }}" name="bgColor">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lineHeight" class="col-sm-5 control-label">Main question line height</label>
+                                    <div class="col-sm-7">
+                                        <input id="lineHeight"  class="form-control" type="number"  value="{{ popUp.lineHeight }}" name="lineHeight">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="textTopMargin" class="col-sm-5 control-label">Main question margin top</label>
+                                    <div class="col-sm-7">
+                                        <input id="textTopMargin"  class="form-control" type="number"  value="{{ popUp.textTopMargin }}" name="textTopMargin">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="letterSpacing" class="col-sm-5 control-label">Letter spacing</label>
+                                    <div class="col-sm-7">
+                                        <input id="letterSpacing"  class="form-control" type="number"  value="{{ popUp.letterSpacing }}" name="letterSpacing">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fontStyle" class="col-sm-5 control-label">Font style</label>
+                                    <div class="col-sm-7">
+                                        <select id="fontStyle" name="fontStyle" class="form-control">
+                                            <option value="normal" {% if popUp.fontStyle == 'normal' %}
+                                                selected="selected"
+                                                    {% endif %}>normal</option>
+                                            <option value="italic" {% if popUp.fontStyle == 'italic' %}
+                                                selected="selected"
+                                                    {% endif %}>italic</option>
+                                            <option value="oblique" {% if popUp.fontStyle == 'oblique' %}
+                                                selected="selected"
+                                                    {% endif %}>oblique</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="fontWeight" class="col-sm-5 control-label">Font weight</label>
+                                    <div class="col-sm-7">
+                                        <select id="fontWeight" name="fontWeight" class="form-control">
+                                            <option value="100" {% if popUp.fontWeight == '100' %}
+                                                selected="selected"
+                                                    {% endif %}>100</option>
+                                            <option value="200" {% if popUp.fontWeight == '200' %}
+                                                selected="selected"
+                                                    {% endif %}>200</option>
+                                            <option value="300" {% if popUp.fontWeight == '300' %}
+                                                selected="selected"
+                                                    {% endif %}>300</option>
+                                            <option value="400" {% if popUp.fontWeight == '400' %}
+                                                selected="selected"
+                                                    {% endif %}>400</option>
+                                            <option value="500" {% if popUp.fontWeight == '500' %}
+                                                selected="selected"
+                                                    {% endif %}>500</option>
+                                            <option value="600" {% if popUp.fontWeight == '600' %}
+                                                selected="selected"
+                                                    {% endif %}>600</option>
+                                            <option value="700" {% if popUp.fontWeight == '700' %}
+                                                selected="selected"
+                                                    {% endif %}>700</option>
+                                            <option value="800" {% if popUp.fontWeight == '800' %}
+                                                selected="selected"
+                                                    {% endif %}>800</option>
+                                            <option value="900" {% if popUp.fontWeight == '900' %}
+                                                selected="selected"
+                                                    {% endif %}>900</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="answersContainerMarginTop" class="col-sm-5 control-label">Answers container margin top</label>
+                                    <div class="col-sm-7">
+                                        <input id="answersContainerMarginTop"  class="form-control" type="number"  value="{{ popUp.answersContainerMarginTop }}" name="answersContainerMarginTop">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image" class="col-sm-5 control-label">Image</label>
+                                    <div class="col-sm-7">
+                                        <div class="row">
+                                            <div class="col-xs-0 col-md-12">
+
+                                                <a href="#" class="thumbnail">
+                                                    {% if popUp.imageHashName %}
+                                                    <img src="/uploads/images/{{ popUp.imageHashName }}">
+                                                    {% endif %}
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="previous-image" value="{{ popUp.image }}">
+                                        <input type="hidden" name="previousPage" value='' id="prev-page">
+                                        <input type="hidden" id="control-current-page" name="current-page-popup" value="">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-5 col-sm-7">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="delete-image" type="checkbox"> Delete image
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="bgColor" class="col-sm-5 control-label">Upload new image</label>
+                                    <div class="col-sm-7">
+                                        <span class="btn btn-default btn-file">
+                                                Browse <input type="file" id="file-upload" value="Upload" name="file-image">
+                                        </span>
+                                    </div>
+                                </div>
+                                {#<div class="form-group">#}
+                                    {#<div class="col-sm-offset-5 col-sm-7">#}
+                                        {#<div class="checkbox">#}
+                                            {#<label>#}
+                                                {#<input name="confirm-action" type="checkbox"> I confirm my actions#}
+                                            {#</label>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
+                                <div class="form-group">
+                                    <label for="save" class="col-sm-5 control-label"></label>
+                                    <div class="col-sm-7">
+                                        {#<button type="button" class="btn btn-info">Edit pop-up</button>#}
+                                        {#<button type="submit" id="save" class="save-popup-form btn btn-primary qw-strip">Save</button>#}
+
+                                        <div class="btn-group sol-block">
+                                            <button type="button" class="btn btn-primary sol-button save-popup-action">Save</button>
+                                            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-rp" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="pointer-sl save-popup-action">Save</a></li>
+                                                <li><a class="pointer-sl edit-popup-action">Edit</a></li>
+                                                <li><a class="pointer-sl move-to-archive">Move to archive</a></li>
+                                                <li><a class="pointer-sl reload-popup-action">Reload page</a></li>
+                                                <li role="separator" class="divider"></li>
+                                                <li><a class="pointer-sl cloned-as-result">Cloned as Result PopUp</a></li>
+                                            </ul>
+                                        </div>
+
+                                        <button type="button" class="btn btn-danger remove-current-pop-up"> Remove </button>
+                                        <button type="button" class="btn btn-warning clone-popup">Clone</button>
+                                        {#<button type="button" class="btn btn-info">Move to archive</button>#}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <div class="form-group">
+                                    <label for="buttonColor" class="col-sm-5 control-label">Button color</label>
+                                    <div class="col-sm-7">
+                                        <input id="buttonColor" class="form-control rgb-select" type="text"  value="{{ popUp.buttonColor }}" name="buttonColor">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="textColor" class="col-sm-5 control-label">Text color</label>
+                                    <div class="col-sm-7">
+                                        <input id="textColor" class="form-control rgb-select" type="text"  value="{{ popUp.textColor }}" name="textColor">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="borderRadius" class="col-sm-5 control-label">Border radius</label>
+                                    <div class="col-sm-7">
+                                        <input id="borderRadius" class="form-control" type="number"  value="{{ popUp.borderRadius }}" name="borderRadius">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="borderColour" class="col-sm-5 control-label">Border color</label>
+                                    <div class="col-sm-7">
+                                        <input id="borderColour" type="text" class="form-control rgb-select"  value="{{ popUp.borderColour }}" name="borderColour">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="borderWidth" class="col-sm-5 control-label">Border width</label>
+                                    <div class="col-sm-7">
+                                        <input id="borderWidth" class="form-control" type="number" value="{{ popUp.borderWidth }}" name="borderWidth">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="borderWidth" class="col-sm-5 control-label">Note</label>
+                                    <div class="col-sm-7">
+                                        <textarea class="form-control popup-text-area" name="note">{{ popUp.note }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-5 control-label">Border style</label>
+                                    <div class="col-sm-7">
+                                        <select id="borderStyle" class="form-control" name="borderStyle">
+                                            <option value="3" {% if popUp.borderStyle.id == 3 %}
+                                                selected="selected"
+                                                    {% endif %}>none</option>
+                                            <option value="2" {% if popUp.borderStyle.id == 2 %}
+                                                selected="selected"
+                                                    {% endif %}>hidden</option>
+                                            <option value="1" {% if popUp.borderStyle.id == 1 %}
+                                                selected="selected"
+                                                    {% endif %}>dotted</option>
+                                            <option value="4" {% if popUp.borderStyle.id == 4 %}
+                                                selected="selected"
+                                                    {% endif %}>dashed</option>
+                                            <option value="5" {% if popUp.borderStyle.id == 5 %}
+                                                selected="selected"
+                                                    {% endif %}>solid</option>
+                                            <option value="6" {% if popUp.borderStyle.id == 6 %}
+                                                selected="selected"
+                                                    {% endif %}>double</option>
+                                            <option value="7" {% if popUp.borderStyle.id == 7 %}
+                                                selected="selected"
+                                                    {% endif %}>groove</option>
+                                            <option value="8" {% if popUp.borderStyle.id == 8 %}
+                                                selected="selected"
+                                                    {% endif %}>ridge</option>
+                                            <option value="9" {% if popUp.borderStyle.id == 9 %}
+                                                selected="selected"
+                                                    {% endif %}>inset</option>
+                                            <option value="10" {% if popUp.borderStyle.id == 10 %}
+                                                selected="selected"
+                                                    {% endif %}>outset</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mainQuestionTextSize" class="col-sm-5 control-label">Main question text size</label>
+                                    <div class="col-sm-7">
+                                        <input id="mainQuestionTextSize" type="number" class="form-control" value="{{ popUp.mainQuestionTextSize }}" name="mainQuestionTextSize">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="answersTextSize" class="col-sm-5 control-label">Answers text size</label>
+                                    <div class="col-sm-7">
+                                        <input id="answersTextSize" type="number" class="form-control"  value="{{ popUp.answersTextSize }}" name="answersTextSize">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="update" class="col-sm-5 control-label">Last update</label>
+                                    <div class="col-sm-7">
+                                        <input id="update" type="text" class="form-control"  value="{{ popUp.update }}" name="update" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="update" class="col-sm-5 control-label">Button text color</label>
+                                    <div class="col-sm-7">
+                                        <input id="update" type="text" name="buttonTextColor" class="form-control rgb-select"  value="{{ popUp.buttonTextColor }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pictureWidth" class="col-sm-5 control-label">Picture width</label>
+                                    <div class="col-sm-7">
+                                        <input id="pictureWidth" type="number" name="pictureWidth" class="form-control"  value="{{ popUp.pictureWidth }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pictureTopMargin" class="col-sm-5 control-label">Picture top margin</label>
+                                    <div class="col-sm-7">
+                                        <input id="pictureTopMargin" type="number" name="pictureTopMargin" class="form-control"  value="{{ popUp.pictureTopMargin }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pictureBorderRadius" class="col-sm-5 control-label">Picture border radius</label>
+                                    <div class="col-sm-7">
+                                        <input id="pictureBorderRadius" type="number" name="pictureBorderRadius" class="form-control"  value="{{ popUp.pictureBorderRadius }}">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="pictureOpacity" class="col-sm-5 control-label">Picture opacity range: 0 - 1. Step - 0.1.</label>
+                                    <div class="col-sm-7">
+                                        <input id="pictureOpacity" type="number" name="pictureOpacity" class="form-control"  value="{{ popUp.pictureOpacity }}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tt_tab questions-tab {% if active == 'save-question' %} active {% endif %}">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Add new question:
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="{{ url('homepage')  }}addQuestion" method="post" id="add-question-form">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="colour-text col-sm-2 control-label">Question Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" name="question-name-field" value="" class="form-control new-question-input" id="question-name-field" placeholder="Name">
+                                    <input type="hidden" name="pop-up-id" value="{{ popUp.id }}" class=" " id="page-popup-id">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="button" class="btn btn-primary add-question-button"> + Add a question</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Questions <span class="badge">{{ count }}</span> </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="panel-group"  id="accordion" role="tablist" aria-multiselectable="true">
+
+
+                            {% for question in questions %}
+
+                                {% set collapse = random(9999) %}
+                                {% set counter = 0  %}
+
+                                <div class="panel panel-default colour-text question-block" id="" data-question-id="{{ question.id }}">
+                                    <div class="panel-heading" role="tab" id="{{ collapse }}-headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" class="question-name" >
+                                                {{ question.question }}
+                                            </a>
+                                            <span class="label label-primary edit-question-button">Rename</span>
+                                            <span class="label label-danger remove-question-button">Remove</span>
+                                            <span class="label label-success count-answers">answers: {{ question.answers|length }}</span>
+                                        </h4>
+
+                                        <form class="form-inline rename-question">
+                                            <div class="form-group">
+                                                <label for="input-{{ collapse }}">Rename question</label>
+                                                <input type="text" class="form-control rename-placeholder" id="input-{{ collapse }}" placeholder="{{ question.question }}">
+                                            </div>
+                                            <button type="button" class="btn btn-default rename-question-button">Rename</button>
+                                        </form>
+
+                                    </div>
+                                    <div id="{{ collapse }}-collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{ collapse }}-headingOne">
+                                        <div class="panel-body">
+
+                                            <div class="answers-container">
+
+                                                {% for answer in question.answers %}
+
+                                                    {% set collapse2 = random(9999) %}
+
+                                                    <form class="form-inline add-answer-line">
+                                                        <div class="form-group">
+                                                            <label for="{{ collapse2 }}-input-name">Answer:</label>
+                                                            <input type="text" value="{{ answer.answer }}" name="answer-name" class="form-control listener" id="{{ collapse2 }}-input-name">
+                                                            <input type="hidden" value="{{ answer.id }}" class="answer-id">
+                                                        </div>
+                                                        <div class="form-group right-group">
+                                                            <label for="{{ collapse2 }}-input-name-2">Action:</label>
+                                                            <select name="identifier" class="form-control change-action listener" id="{{ collapse2 }}-input-name-2">
+                                                                <option value="QP" {% if answer.identifire == 'QP' %} selected {% endif %}>Go to Question</option>
+                                                                <option value="L" {% if answer.identifire == 'L' %} selected {% endif %}>Go to Link</option>
+                                                                <option value="RP" {% if answer.identifire == 'RP' %} selected {% endif %}>Go to Results Popup</option>
+                                                                <option value="UP" {% if answer.identifire == 'UP' %} selected {% endif %}>Go to User's Popup</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group action-block">
+                                                            <label for="{{ collapse2 }}-add-2-line"> <span class="glyphicon glyphicon-link"></span> </label>
+                                                            <span class="action-string">
+
+                                                                {% if answer.identifire == 'L' %}
+                                                                    <input name="action-value" type="text" value="{{ answer.identifireStepID }}" class="form-control input-parameters listener" id="{{ collapse2 }}-add-2-line">
+                                                                {% elseif answer.identifire == 'QP' %}
+                                                                    <select name="action-value" class="form-control input-parameters listener" id="{{ collapse2 }}-add-2-line">
+                                                                        {% for options in questions %}
+                                                                            {% if question.id != options.id %}
+                                                                                <option value="{{ options.id }}" {% if answer.identifireStepID == options.id %} selected {% endif %}>{{ options.question }}</option>
+                                                                            {% endif %}
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                {% elseif answer.identifire == 'RP' %}
+                                                                    <select name="action-value" class="form-control input-parameters listener" id="{{ collapse2 }}-add-2-line">
+                                                                        {% for result in resultPopUp %}
+                                                                            <option value="{{ result.id }}" {% if answer.identifireStepID == result.id %} selected {% endif %}>{{ result.name }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                {% elseif answer.identifire == 'UP' %}
+                                                                    <select name="action-value" class="form-control input-parameters listener" id="{{ collapse2 }}-add-2-line">
+                                                                        {% for usPopUp in userPopUp %}
+                                                                            <option value="{{ usPopUp.id }}" {% if answer.identifireStepID == usPopUp.id %} selected {% endif %}>{{ usPopUp.popupName }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+                                                                {% endif %}
+
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" class="btn btn-danger delete-current-answer">Delete</button>
+                                                        <button type="button" class="btn btn-info save-answer-button save-answer-input">Save</button>
+                                                    </form>
+
+                                                {% endfor %}
+                                            </div>
+
+                                                <p>
+                                                    <button class="btn btn-primary add-a-answer" type="button" data-toggle="collapse" data-target="#{{ collapse }}-collapse" aria-expanded="true" aria-controls="{{ collapse }}-collapsee">
+                                                        + Add a answer
+                                                    </button>
+                                                </p>
+                                            <div class="collapse in collapse-new-answer" id="{{ collapse }}-collapse" aria-expanded="true">
+                                                <div class="well">
+
+                                                    <form class="form-inline add-answer-line separate-line-answer form-adding" style="">
+                                                        <div class="form-group">
+                                                            <label for="{{ collapse }}-input-name">Answer:</label>
+                                                            <input type="text" name="answer-name" class="form-control" id="{{ collapse }}-input-name">
+                                                            <input type="hidden" value="" class="answer-id">
+                                                        </div>
+                                                        <div class="form-group right-group">
+                                                            <label for="{{ collapse }}-input-name-2">Action:</label>
+                                                            <select class="form-control change-action without-class" name="identifier" id="{{ collapse }}-input-name-2">
+                                                                <option value="L">Go to Link</option>
+                                                                <option value="QP">Go to Question</option>
+                                                                <option value="RP">Go to Results Popup</option>
+                                                                <option value="UP">Go to User's Popup</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group action-block">
+                                                            <label for="{{ collapse }}-add-2-line"> <span class="glyphicon glyphicon-link"></span> </label>
+                                                            <span class="action-string">
+
+                                                                <input type="text" placeholder="input the link ..." name="action-value" class="form-control input-link-start" id="{{ collapse }}-add-2-line">
+
+                                                            </span>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary add-answer-button">Add</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+                            <div class="panel panel-default colour-text question-block" id="question-main-element" data-question-id="">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" class="question-name" >
+                                            Question 1
+                                        </a>
+                                        <span class="label label-primary edit-question-button">Rename</span>
+                                        <span class="label label-danger remove-question-button">Remove</span>
+                                        <span class="label label-success count-answers">answers: {{ question.answers|length }}</span>
+                                    </h4>
+
+                                    <form class="form-inline rename-question">
+                                        <div class="form-group">
+                                            <label for="input-field">Rename question</label>
+                                            <input type="text" class="form-control rename-placeholder" value="" id="input-field" placeholder="">
+                                        </div>
+                                        <button type="button" class="btn btn-default rename-question-button">Rename</button>
+                                    </form>
+
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                    <div class="panel-body">
+
+                                        <div class="answers-container">
+
+                                        </div>
+
+                                        <p>
+                                            <button class="btn btn-primary add-a-answer" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="true" aria-controls="collapseExample">
+                                                + Add a answer
+                                            </button>
+                                        </p>
+                                        <div class="collapse in collapse-new-answer" id="collapseExample" aria-expanded="true">
+                                            <div class="well">
+
+                                                <form class="form-inline add-answer-line form-adding">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputName2">Answer:</label>
+                                                        <input type="text" name="answer-name" class="form-control" id="exampleInputName2">
+                                                        <input type="hidden" value="" class="answer-id">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail2">Action:</label>
+                                                        <select class="form-control change-action without-class" id="exampleInputEmail2" name="identifier">
+                                                            <option value="L">Go to Link</option>
+                                                            <option value="QP">Go to Question</option>
+                                                            <option value="RP">Go to Results Popup</option>
+                                                            <option value="UP">Go to User's Popup</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group action-block">
+                                                        <label for="add-2-line"> <span class="glyphicon glyphicon-link"></span> </label>
+                                                        <span class="action-string">
+
+                                                            <input type="text" name="action-value" class="form-control set input-link-start" id="add-2-line" placeholder="input the link ...">
+
+                                                        </span>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary add-answer-button">Add</button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="tt_tab">
+                <a class="btn btn-primary collapsed" role="button" data-toggle="collapse" href="#new-pop-up" aria-expanded="false" aria-controls="new-pop-up">
+                    Create new Result-Popup
+                </a>
+
+                <button class="btn btn-primary show-block-with-code" data-position="0">Create via source code</button>
+                <div id="demo-block-code" class="create-source-code">
+
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span></button>
+                        <strong>Be careful!</strong>
+                        In order to avoid mistakes with the styles in the administrative panel, use unique names for your
+                        classes. Also, do not apply styles to the basic elements of the page - (&lt body &gt, &lt div &gt, &lt span &gt and so on).
+                        <span style="color: red"> Incorrect code - will break your page. </span>
+                    </div>
+
+                    <form name="source-code-popup" id="block-code-popup">
+                        <div class="row row-margin">
+                            <div class="col-xs-6 col-md-4 cree-6">
+                                <p class="html-info"><b>Please, put your html - code here:</b></p>
+                                <div class="form-group form-fg-group">
+                                    <label for="exampleInputPassword1"></label>
+                                    <span><b class="rty-9"> &lt html &gt </b></span>
+                                    <textarea name="html-code" class="form-control text-area-style er-7"></textarea>
+                                    <span><b class="rty-9"> &lt /html &gt</b> </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 cree-6">
+                                <p class="html-info"><b>Please, put your css - code here:</b></p>
+                                <div class="form-group form-fg-group">
+                                    <label for="exampleInputPassword1"></label>
+                                    <span><b class="rty-9"> &lt style &gt </b></span>
+                                    <textarea name="css-code" class="form-control text-area-style er-8"></textarea>
+                                    <span><b class="rty-9"> &lt /style &gt</b> </span>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 col-md-4 cree-6">
+                                <p class="html-info"><b>Additional information:</b></p>
+                                <div class="form-group form-fg-group">
+                                    <label for="exampleInputPassword1"></label>
+                                    <p></p>
+                                         <input type="hidden" class="form-control" value="{{ popUp.id }}" name="popUpId">
+                                         <textarea name="dop-info" class="form-control pm-stl"></textarea>
+                                </div>
+
+                                <p class="html-info"><b>Please, provide name of your pop-up window:</b></p>
+                                <div class="form-group form-fg-group">
+                                    <label for="exampleInputPassword1"></label>
+                                    <p></p>
+                                    <input name="individual-popup-name" class="form-control tsl-list">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-success well-done-popup" role="alert">
+                            <strong>Well done!</strong>
+                            Your pop-up window has been successfully added. <br>
+                            <span class="add-nfo-popup"> The page will be reloaded (after <span id="back-timer">10</span> seconds) for the purpose in order to apply the changes. </span>
+                        </div>
+
+                        <button type="button" class="btn btn-primary strim-s prim-8">Save</button>
+                    </form>
+                </div>
+
+                <div class="collapse" id="new-pop-up">
+                    <div class="well">
+                        <div class="error"><span></span></div>
+                        <form class="form-horizontal" action="" enctype="multipart/form-data" method="post" id="result-pop-up-form">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-5 control-label">Name</label>
+                                            <div class="col-sm-7">
+                                                <input id="name" type="text" class="form-control required" placeholder="Name" name="name" data-validate="name">
+                                                <input type="hidden" class="form-control" placeholder="id" value=" {{ popUp.id }} " name="parent-popUpId">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="mainTitle" class="col-sm-5 control-label">MainTitle</label>
+                                            <div class="col-sm-7">
+                                                <input id="mainTitle" type="text" class="form-control required" placeholder="MainTitle" name="mainTitle" data-validate="mainTitle">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="height" class="col-sm-5 control-label">Height</label>
+                                            <div class="col-sm-7">
+                                                <input id="height" class="form-control" type="number" value="" placeholder="Height" name="height">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="width" class="col-sm-5 control-label">Width</label>
+                                            <div class="col-sm-7">
+                                                <input id="width" class="form-control" placeholder="Width" type="number" value="" name="width">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="imageSizeHead" class="col-sm-5 control-label">ImageSizeHead</label>
+                                            <div class="col-sm-7">
+                                                <input id="imageSizeHead"  class="form-control" type="number" placeholder="ImageSizeHead" name="imageSizeHead">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="imageSizeBody" class="col-sm-5 control-label">ImageSizeBody</label>
+                                            <div class="col-sm-7">
+                                                <input id="imageSizeBody" type="number" placeholder="ImageSizeBody" name="imageSizeBody"  class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="bgColor" class="col-sm-5 control-label">BGColor</label>
+                                            <div class="col-sm-7">
+                                                <input id="bgColor" type="text" name="bgColor" placeholder="BGColor"  class="form-control rgb-select">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="buttonColor" class="col-sm-5 control-label">ButtonColor</label>
+                                            <div class="col-sm-7">
+                                                <input id="buttonColor" type="text" name="buttonColor" placeholder="ButtonColor"  class="form-control rgb-select">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="borderStyle" class="col-sm-5 control-label">BorderStyle</label>
+                                            <div class="col-sm-7">
+                                                <select id="borderStyle" class="form-control" name="borderStyle">
+                                                    <option value="3">none</option>
+                                                    <option value="2">hidden</option>
+                                                    <option value="1">dotted</option>
+                                                    <option value="4">dashed</option>
+                                                    <option value="5">solid</option>
+                                                    <option value="6">double</option>
+                                                    <option value="7">groove</option>
+                                                    <option value="8">ridge</option>
+                                                    <option value="9">inset</option>
+                                                    <option value="10">outset</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        {#------#}
+
+                                        <div class="form-group">
+                                            <label for="buttonTopMargin" class="col-sm-5 control-label">ButtonTopMargin</label>
+                                            <div class="col-sm-7">
+                                                <input id="buttonTopMargin" type="number" name="buttonTopMargin" placeholder="buttonTopMargin"  class="form-control">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="buttonTextColour" class="col-sm-5 control-label">ButtonTextColour</label>
+                                            <div class="col-sm-7">
+                                                <input id="buttonTextColour" type="text" name="buttonTextColour" placeholder="buttonTextColour"  class="form-control rgb-select">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="textBlockMessage" class="col-sm-5 control-label">TextBlockMessage</label>
+                                            <div class="col-sm-7">
+                                                <textarea class="form-control" id="textBlockMessage" name="textBlockMessage">{{ textBlockMessage }}</textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="textBlockMessageSize" class="col-sm-5 control-label">TextBlockMessageSize</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="textBlockMessageSize" type="number" name="textBlockMessageSize" placeholder="textBlockMessageSize" value="{{ textBlockMessageSize }}">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="options-block" class="col-sm-5 control-label">DefineTheBlock</label>
+                                            <div class="col-sm-7">
+                                                <select id="options-block" class="form-control" name="blockStatus">
+                                                    <option value="RB">Use rating block</option>
+                                                    <option value="TB">Use text block</option>
+                                                    <option value="ZO">Leave empty</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        {#------#}
+                                        <div class="form-group">
+                                            <label for="bgColor" class="col-sm-5 control-label">Head Image</label>
+                                            <div class="col-sm-7">
+                                                <input type="file" id="" value="Upload" name="head-image">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="bgColor" class="col-sm-5 control-label">Body Image</label>
+                                            <div class="col-sm-7">
+                                                <input type="file" id="" value="Upload" name="body-image">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="save" class="col-sm-5 control-label"></label>
+                                            <div class="col-sm-7">
+                                                <button type="submit" id="save" class="save-popup-form btn btn-primary save-form-result">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group">
+                                            <label for="textColor" class="col-sm-5 control-label">TextColor</label>
+                                            <div class="col-sm-7">
+                                                <input id="textColor" placeholder="TextColor" class="form-control rgb-select" type="text" name="textColor">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="borderRadius" class="col-sm-5 control-label">BorderRadius</label>
+                                            <div class="col-sm-7">
+                                                <input id="borderRadius" class="form-control" type="number" name="borderRadius" placeholder="BorderRadius">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="textContainerFluidMargin" class="col-sm-5 control-label">Margin Between Text Blocks</label>
+                                            <div class="col-sm-7">
+                                                <input id="textContainerFluidMargin" class="form-control" type="number" name="textContainerFluidMargin" placeholder="TextContainerFluidMargin">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="mainPopupPadding" class="col-sm-5 control-label">Popup Padding</label>
+                                            <div class="col-sm-7">
+                                                <input id="mainPopupPadding" class="form-control" type="number" name="mainPopupPadding" placeholder="PopupPadding">
+                                            </div>
+                                        </div>
+
+                                        <br>
+                                        <div class="form-group">
+                                            <label for="ratingOne" class="col-sm-5 control-label">Please, select the numbers of rating rows</label>
+                                            <div class="col-sm-7 rating-area-f">
+
+                                                <select class="form-control" name="rating-count" id="rating-count">
+                                                    <option value="1" >1</option>
+                                                    <option value="2" >2</option>
+                                                    <option value="3" >3</option>
+                                                </select>
+
+                                                <div>
+                                                    <div id="RB-1"><input id="ratingOne" class="form-control rating-text-element" type="text" name="ratingTextOne" placeholder="Enter the rating text one"></div>
+                                                    <div id="RB-2" style="display: none"><input id="ratingTwo" class="form-control rating-text-element"  type="text" name="ratingTextTwo" placeholder="Enter the rating text two"></div>
+                                                    <div id="RB-3" style="display: none"><input id="ratingThree" class="form-control rating-text-element"  type="text" name="ratingTextThree" placeholder="Enter the rating text three"></div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <br>
+
+                                        <div class="form-group">
+                                            <label for="ratingTwo" class="col-sm-5 control-label"></label>
+                                            <div class="col-sm-7">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="ratingTextSize" class="col-sm-5 control-label">RatingTextSize</label>
+                                            <div class="col-sm-7">
+                                                <input id="ratingTextSize" class="form-control" type="number" name="ratingTextSize" placeholder="RatingTextSize">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="url" class="col-sm-5 control-label">Go to URL</label>
+                                            <div class="col-sm-7">
+                                                <span class="ex-site">Example: http://www.testsite.com</span>
+                                                <input class="form-control" id="url" type="text" name="url" placeholder="Url">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="buttonText" class="col-sm-5 control-label">ButtonText</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="buttonText" type="text" name="buttonText" placeholder="ButtonText">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="buttonWidth" class="col-sm-5 control-label">ButtonWidth</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="buttonWidth" type="number" name="buttonWidth" placeholder="ButtonWidth">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="buttonHeight" class="col-sm-5 control-label">ButtonHeight</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="buttonHeight" type="number" name="buttonHeight" placeholder="ButtonHeight">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4">
+                                        <div class="form-group">
+                                            <label for="borderColour" class="col-sm-5 control-label">BorderColour</label>
+                                            <div class="col-sm-7">
+                                                <input class="rgb-select form-control" id="borderColour" type="text" name="borderColour" placeholder="BorderColour">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="borderWidth" class="col-sm-5 control-label">BorderWidth(px)</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="borderWidth" type="number" name="borderWidth" placeholder="BorderWidth">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="mainQuestionTextSize" class="col-sm-5 control-label">MainQuestion TextSize(pt)</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="mainQuestionTextSize" type="number" name="mainQuestionTextSize" placeholder="MainQuestionTextSize">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="answersTextSize" class="col-sm-5 control-label">Answers TextSize(pt)</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="answersTextSize" type="number" name="answersTextSize" placeholder="AnswersTextSize" value="">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="imageHead" class="col-sm-5 control-label">ImageHead</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="imageHead" type="text" name="imageFileHead" placeholder="ImageHead" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="imageBody" class="col-sm-5 control-label">ImageBody</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" id="imageBody" type="text" name="imageFileBody" placeholder="ImageBody" readonly>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="imageBody" class="col-sm-5 control-label">Note</label>
+                                            <div class="col-sm-7">
+                                                <textarea class="form-control" rows="10" id="note" cols="30" name="note"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="panel panel-primary" id="container-result">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Pop Ups</h3>
+                    </div>
+                    <div class="panel-body result-popups-container">
+
+
+                        <div class="panel-group" id="do-accordion" role="tablist" aria-multiselectable="true">
+
+                            {% for indexPopup in userPopUp %}
+
+                                {% set counter = random(99999) %}
+
+
+
+                                <div class="panel panel-default">
+
+
+
+                                    <div class="panel-heading" role="tab" id="{{ counter }}-headingOne">
+                                        <h4 class="panel-title">
+                                            <a role="button" data-toggle="collapse" data-parent="#do-accordion" href="#{{ counter }}-collapseOne" aria-expanded="true" aria-controls="{{ counter }}-collapseOne">
+                                                {{ indexPopup.popupName }}
+                                            </a>
+                                            <input type="hidden" value="{{ indexPopup.id }}" class="user-popup-id">
+                                            <span class="label label-primary some-action str-edit-popup" style="margin-left: 10px">Edit</span>
+                                            <span class="label label-danger some-action remove-user-popup">Remove</span>
+                                            <span class="label label-warning popup-identif">User's popup</span>
+
+                                        </h4>
+                                    </div>
+
+                                    <div id="{{ counter }}-collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{ counter }}-headingOne">
+                                        <div class="panel-body">
+
+                                            <style>
+                                                {{ indexPopup.cssCode }}
+                                            </style>
+
+                                            <div class="user-block-code">
+                                                {{ indexPopup.htmlCode | raw }}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            {% endfor %}
+
+                            {% for iterator in resultPopUp %}
+
+                            {% set default = random(9999) %}
+                            {% set counter = 0  %}
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading" role="tab" id="{{ default }}-headingOne">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#do-accordion" href="#{{ default }}-collapseOne" aria-expanded="true" aria-controls="{{ default }}-collapseOne">
+                                            {{ iterator.name }}
+                                        </a>
+                                        <input type="hidden" value="{{ iterator.id }}" class="res-popup-id">
+                                        <span class="label label-primary some-action edit-result-pop-up" style="margin-left: 10px">Edit</span>
+                                        <span class="label label-danger some-action remove-current-pop-up-result">Remove</span>
+                                    </h4>
+                                </div>
+                                <div id="{{ default }}-collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="{{ default }}-headingOne">
+                                    <div class="panel-body">
+
+                                        <div class="pop-up" style=" padding: {{ iterator.mainPopupPadding }}px; height: {{ iterator.height }}; width: {{ iterator.width }}; background-color: {{ iterator.bgColor }};
+                                                                    color: {{ iterator.textColor }};
+                                                                    border-radius: {{ iterator.borderRadius }}px;
+                                                                    border: {{ iterator.borderWidth }}px {{ iterator.borderStyle.type }} {{ iterator.borderColour }};
+                                                                    margin-left: 40%;">
+                                            <div style="margin-left: 90%;"><img class="close-result-pop-up" src="{{ asset('app/system_image/close-button.png')}}"></div>
+                                            {% if iterator.imageFileHead %}
+                                                <div class="image-container" style="width:100%; margin-top: {{ iterator.imageTopMargin }}px; margin-bottom: {{ iterator.imageMarginBottom }}px;"><img class="header-image" style="width: inherit; max-width: {{ iterator.imageSizeHead }}; max-height: {{ iterator.imageSizeHead }};" src="/uploads/images/{{ iterator.imageFileHead }}"></div>
+                                            {% endif %}
+                                            <hr style="width: 90%; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+                                            <div class="main-question" style="font-size: {{ iterator.mainTitleTextSize }}pt; text-align: center; line-height: 1;">{{ iterator.mainTitle }}</div>
+                                            {% if iterator.imageFileBody %}
+                                                <div class="image-container"><img class="body-image" style="max-width: {{ iterator.imageSizeBody }}; max-height: {{ iterator.imageSizeBody }};" src="/uploads/images/{{ iterator.imageFileBody }}"></div>
+                                            {% endif %}
+                                            <div class="answer-container" style="width:100%; margin-top: 9%; height: 17%; {% if iterator.blockStatus == 'RB' %} display: block; {% elseif iterator.blockStatus == 'TB' or  iterator.blockStatus == 'ZO'%} display: none !important; {% endif %}">
+
+                                                <div class="rating-container"><span class="spl-rating-string" id="" style="font-size: {{ iterator.ratingTextSize }}pt; width: {{ iterator.indTextWidthOne }}px;">{{ iterator.ratingTextOne }}</span>
+                                                    <div class="reviewStars-input" style="margin-top: 2%">
+                                                        <input id="{{ default }}-star-4" type="radio" name="reviewStars"/>
+                                                        <label title="gorgeous" for="{{ default }}-star-4"></label>
+                                                        <input id="{{ default }}-star-3" type="radio" name="reviewStars"/>
+                                                        <label title="good" for="{{ default }}-star-3"></label>
+                                                        <input id="{{ default }}-star-2" type="radio" name="reviewStars"/>
+                                                        <label title="regular" for="{{ default }}-star-2"></label>
+                                                        <input id="{{ default }}-star-1" type="radio" name="reviewStars"/>
+                                                        <label title="poor" for="{{ default }}-star-1"></label>
+                                                        <input id="{{ default }}-star-0" type="radio" name="reviewStars"/>
+                                                        <label title="bad" for="{{ default }}-star-0"></label>
+                                                    </div>
+                                                </div>
+
+                                                {% if iterator.countRating == 2 or iterator.countRating == 3 %}
+
+                                                <div class="rating-container container-fluid"><span class="spl-rating-string" id="" style="font-size: {{ iterator.ratingTextSize }}pt; width: {{ iterator.indTextWidthTwo }}px;">{{ iterator.ratingTextTwo }}</span>
+                                                    <div class="reviewStars-input-two" style="margin-top: 2%">
+                                                        <input id="{{ default }}-star-41" type="radio" name="reviewStars2"/>
+                                                        <label title="gorgeous" for="{{ default }}-star-41"></label>
+                                                        <input id="{{ default }}-star-31" type="radio" name="reviewStars2"/>
+                                                        <label title="good" for="{{ default }}-star-31"></label>
+                                                        <input id="{{ default }}-star-21" type="radio" name="reviewStars2"/>
+                                                        <label title="regular" for="{{ default }}-star-21"></label>
+                                                        <input id="{{ default }}-star-11" type="radio" name="reviewStars2"/>
+                                                        <label title="poor" for="{{ default }}-star-11"></label>
+                                                        <input id="{{ default }}-star-01" type="radio" name="reviewStars2"/>
+                                                        <label title="bad" for="{{ default }}-star-01"></label>
+                                                    </div>
+                                                </div>
+
+                                                {% endif %}
+
+                                                {% if iterator.countRating == 3 %}
+
+                                                <div class="rating-container container-fluid"><span class="spl-rating-string separate-class" id="" style="font-size: {{ iterator.ratingTextSize }}pt; width: {{ iterator.indTextWidthThree }}px;">{{ iterator.ratingTextThree }}</span>
+                                                    <div class="reviewStars-input-two" style="margin-top: 0%">
+                                                        <input id="{{ default }}-star-42" type="radio" name="reviewStars3"/>
+                                                        <label title="gorgeous" for="{{ default }}-star-42"></label>
+                                                        <input id="{{ default }}-star-32" type="radio" name="reviewStars3"/>
+                                                        <label title="good" for="{{ default }}-star-32"></label>
+                                                        <input id="{{ default }}-star-22" type="radio" name="reviewStars3"/>
+                                                        <label title="regular" for="{{ default }}-star-22"></label>
+                                                        <input id="{{ default }}-star-12" type="radio" name="reviewStars3"/>
+                                                        <label title="poor" for="{{ default }}-star-12"></label>
+                                                        <input id="{{ default }}-star-02" type="radio" name="reviewStars3"/>
+                                                        <label title="bad" for="{{ default }}-star-02"></label>
+                                                    </div>
+                                                </div>
+
+                                                {% endif %}
+
+                                            </div>
+
+                                            <div class="text-container-fluid" style=" margin: {{ iterator.textContainerFluidMargin }} 0 auto; font-size: {{ iterator.textBlockMessageSize }}pt;
+                                                    text-align: center; word-wrap: break-word; {% if iterator.blockStatus == 'TB' %} display: block; {% elseif iterator.blockStatus == 'RB' or  iterator.blockStatus == 'ZO'%} display: none !important; {% endif %}">
+                                                <pre class="text-fluid-str" style="background-color: inherit; border: none; word-wrap: break-word; text-align: center; color: {{ iterator.textColor }}; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: {{ iterator.textBlockMessageSize }}pt;">{{ iterator.textBlockMessage }}</pre></div>
+                                            <a href="{{ iterator.url }}" class="button-0 {{ default }}" style="
+                                                    color: {{ iterator.buttonTextColour }};
+                                                    background-color: {{ iterator.buttonColor }};
+                                                    width: {{ iterator.buttonWidth }}px;
+                                                    box-shadow: 0 5px {{ iterator.buttonShadow }};
+                                                    height: {{ iterator.buttonHeight }}px;
+                                                    margin-top: {{ iterator.buttonTopMargin }}px;
+                                            "><span style="font-size: {{ iterator.buttonTextSize }}pt" class="inner-span-button">{{ iterator.buttonText }}</span></a>
+
+                                            <style>
+                                                .{{ default }}:hover {
+                                                    color: {{ iterator.buttonTextColour }};
+                                                }
+                                            </style>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tt_tab">
+
+                <p class="bg-primary info-message"><b>Please, register the link (website), which will display a pop-up window.</b></p>
+                <form class="form-horizontal site-form" id="create-new-site-form">
+                    <div class="form-group">
+                        <label for="name-site" class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" value="{{ site.name }}" name="name" class="form-control" id="name-site" placeholder="Site name">
+                            <input type="hidden" name="site-id" id="unique-site-id" value="{{ site.id }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="name-protocol" class="col-sm-2 control-label">Select the protocol</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="name-protocol">
+                                <option {% if site.protocol  == 'http://'%} selected="selected" {% endif %}>http</option>
+                                <option {% if site.protocol  == 'https://'%} selected="selected" {% endif %}>https</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="basic-url" class="col-sm-2 control-label">Site URL</label>
+                        <div class="col-sm-10">
+                            {#<span> Example: "pokersites.com"</span>#}
+                            <div class="input-group">
+
+                                <span class="input-group-addon" id="basic-addon3">{% if site.protocol  == 'https://'%} https:// {% else %} http:// {% endif %}</span>
+                                <input type="hidden" name="site-protocol" value="{%  if site.protocol == 'https://'%}https://{% elseif site.protocol == 'http://' %}http://{% else %}http://{% endif %}"  class="input-group-addon-protocol">
+
+
+                                <input type="text" placeholder="please, enter the site URL" name="url" value="{{ site.siteUrl }}" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="user-will-see"><b>Please, select the first question, which user will see at the site page.</b></span>
+                        <label for="available-questions" class="col-sm-2">
+                            <span class="glyphicon glyphicon-refresh" data-toggle="tooltip" data-placement="right" title="Click to get available questions."></span>
+                        </label>
+                        <div class="col-sm-10 question-block-margin">
+                            <select class="form-control" id="available-questions" name="availableQuestions">
+                                {% for question in questions %}
+                                <option value="{{ question.id }}" {% if site.quesId  == question.id%} selected="selected" {% endif %}>{{ question.question }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name-protocol" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <div class="checkbox checkbox-stl-pm">
+                                <label>
+                                    <input class="checkbox-input-ots" type="checkbox" name="enabled-status" {% if site.enabled  == true %} checked {% endif %}> Enabled
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Save/Update</button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="alert alert-success alert-success-message"></div>
+
+                <div class="alert alert-warning show-error-site" role="alert">
+                    <strong>Warning!</strong>
+                    This site has already been added to another popup! Please enter the another URL or send existing sites to sleep!
+
+                    <div class="sleep-area">
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+            <div class="tt_tab">
+                <p class="bg-primary info-message"><b>Please, select the condition for display popup.</b></p>
+                <form class="form-horizontal" id="save-condition-set-value">
+                    <div class="form-group">
+                        <label for="inputEmail3" class="col-sm-2 control-label">{{ conditions.SI }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="radio" name="condition" value="SI" aria-label="..." {% if site.appearance == 'SI' %} checked {% endif %}>
+                                          </span>
+                                    <input type="text" class="form-control" aria-label="..." disabled>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SA }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="radio" name="condition" value="SA" {% if site.appearance == 'SA' %} checked {% endif %} aria-label="...">
+                                          </span>
+                                    <input type="number" placeholder="default 5 second" name="SA" {% if site.appearance == 'SA' %} value="{{ site.appValue }}" {% endif %} class="form-control" aria-label="...">
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SV }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="radio" name="condition" value="SV" {% if site.appearance == 'SV' %} checked {% endif %} aria-label="...">
+                                          </span>
+                                    <input type="number" class="form-control" placeholder="default 2 pages" name="SV" aria-label="..." {% if site.appearance == 'SV' %} value="{{ site.appValue }}" {% endif %}>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SE }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="radio" name="condition" value="SE" aria-label="..." {% if site.appearance == 'SE' %} checked {% endif %}>
+                                          </span>
+                                    <input type="text" class="form-control" aria-label="..." disabled>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SO }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="checkbox" name="show-single-activity" value="SO" aria-label="..." {% if siteAdditionalValue.singlVisit %} checked {% endif %}>
+                                          </span>
+                                    <input type="text" class="form-control" aria-label="..." disabled>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SD }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="checkbox" name="device-activity" aria-label="..." {% if siteAdditionalValue.certainDevice %} checked {% endif %}>
+                                          </span>
+                                    <select name="device-element" class="form-control">
+                                        <option value="0">None</option>
+                                        {% for device in devices %}
+                                            <option value="{{ device }}" {% if siteAdditionalValue.certainDevice == device %} selected {% endif %}>{{ device }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">{{ conditions.SC }}</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                          <span class="input-group-addon">
+                                            <input type="checkbox"  name="url-activity" aria-label="..." {% if siteAdditionalValue.url %} checked {% endif %}>
+                                          </span>
+                                    <input type="text" name="certain-url" title="Please, input the full URL with 'http://' in the start ... " placeholder="default All" class="form-control" aria-label="..." {% if siteAdditionalValue.url %} value="{{ siteAdditionalValue.url }}" {% endif %}>
+                                </div><!-- /input-group -->
+                            </div><!-- /.col-lg-6 -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Please, select the position of popup.</label>
+                        <div class="col-sm-10">
+                            <div class="col-lg-3">
+                                <div class="input-group">
+                                    <select name="popup-position" class="form-control control-prm">
+                                       {% for position in positions %}
+                                            <option value="{{ position.id }}" {% if site.popUpPositionId == position.id %} selected {% endif %}>{{ position.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <div class="checkbox checkbox-tsl">
+                                <label>
+                                    <input name="action" type="checkbox" > I confirm my action
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-1 col-sm-10">
+                            <button type="button" class="btn btn-primary save-condition-action">Save action</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="alert alert-warning message-top-sl">
+                    <strong>Warning!</strong> Please, add the URL in previous tab, before you configure the options.
+                </div>
+                <div class="alert alert-warning message-top-st">
+                    <strong>Warning!</strong> The data were not recorded. Confirm your action before save the form.
+                </div>
+                <div class="alert alert-success message-top-sv">
+                    <strong>Success!</strong> The data was successfully written.
+                </div>
+            </div>
+
+            <div class="tt_tab">
+                <p class="bg-primary info-message"><b>Please, click this switcher to activate the preview mode.</b></p>
+
+
+                {#<div class="alert alert-warning  popup-options-display" role="alert">#}
+                    {#<strong>Info!</strong>#}
+                     {#Please, set options for popup window displaying at the previous tab, before you run the plugin.#}
+                    {#<br>Otherwise, the pop-up window is not visible on this page.#}
+                {#</div>#}
+
+
+                <input type="checkbox" class="switch-pm" name="switchName" value="" />
+
+
+                <div class="alert alert-info fade in stop-plugin">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    <strong>Info!</strong> To stop the plugin, the page will be automatically reloaded.
+                </div>
+
+                <div id="dynamic-block">
+                    <div class="loader-go">
+                        <i class="rotate-element"></i>
+                        <i class="rotate-element"></i>
+                    </div>
+                </div>
+
+
+            </div>
+        </div><!-- .tt_container -->
+
+
+    </div> <!-- #main -->
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Message:</h4>
+            </div>
+            <div class="modal-body">
+                <h4 id="error-body"></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="confirmModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="confirm-module-title">Confirm</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="hidden" value="" name="element-id" class="element-to-delete">
+                <input type="hidden" value="" name="element-identifier" class="identifier-to-delete">
+                <button type="button" class="btn btn-primary delete-from-modal">Delete</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="cloneModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="clone-module-title">Confirm</h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="hidden" value="" name="element-id" class="element-to-delete">
+                <input type="hidden" value="" name="element-identifier" class="identifier-to-delete">
+                <button type="button" class="btn btn-primary clone-from-modal">Clone</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-b" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"></div>
+
+</body>
+
+
+
+{#<div class="test-background"></div>#}
+<style>
+
+    .button-0 {
+        position: relative;
+        margin: 0 auto;
+        border-radius: 10px;
+        font-family: 'Helvetica', cursive;
+        font-size: 21px;
+        text-decoration: none;
+        text-shadow: 0px -1px rgba(113, 110, 109, 0.68);
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        display: block;
+        text-align: center;
+    }
+
+    .inner-span-button{
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .button-0:active {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-0:hover {
+        transform: translateY(3px);
+        box-shadow: 0 2px #696e79 !important;
+        text-decoration: none;
+    }
+
+
+    .body-image, .header-image{
+        display: block;
+        background-size: contain;
+        margin: 0 auto;
+        padding: 5px;
+    }
+
+    /*sprite with stars*/
+    .reviewStars-input-two input:checked ~ label, .reviewStars-input-two label,
+    .reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+        background: url('{{ asset('app/system_image/star-image.png') }}') no-repeat;
+    }
+
+    .reviewStars-input input:checked ~ label, .reviewStars-input label,
+    .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+        background: url('{{ asset('app/system_image/star-image.png') }}') no-repeat;
+    }
+
+    .rating-container{
+        padding-left: 20px;
+        padding-right: 15px;
+    }
+    .container-fluid{
+        margin-top: 10px;
+    }
+
+    .reviewStars-input, .reviewStars-input-two {
+        float: right;
+        overflow: hidden;
+        *zoom: 1;
+    }
+
+    .reviewStars-input input, .reviewStars-input-two input {
+        opacity: 0;
+        position: absolute;
+        /*top: 0;*/
+        z-index: 0;
+    }
+
+    .text-container-fluid{
+
+    }
+
+    .reviewStars-input input:checked ~ label, .reviewStars-input-two input:checked ~ label {
+        background-position: 0 -18px;
+        height: 18px;
+        width: 20px;
+    }
+
+    .reviewStars-input label, .reviewStars-input-two label {
+        background-position: 0 0;
+        height: 18px;
+        width: 20px;
+        float: right;
+        cursor: pointer;
+        margin-right: 10px;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    .reviewStars-input label:hover, .reviewStars-input label:hover ~ label, .reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+        background-position: 0 -18px;
+        height: 18px;
+        width: 20px;
+    }
+
+    .ex-site{
+        color: #00acd6;
+    }
+    .persist{
+        display: block;
+    }
+    .attr-margin{
+        margin-left: 159px;
+    }
+
+</style>
+
+
+
+

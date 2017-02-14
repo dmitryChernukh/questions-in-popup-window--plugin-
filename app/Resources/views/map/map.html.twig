@@ -1,0 +1,70 @@
+<script type="text/javascript" src="{{ asset('bundles/easyadmin/javascript/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/render.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/turbotabs.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jquery.validate.min.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning back">Back</button></div>
+
+<form class="pure-form pure-form-aligned">
+    <fieldset>
+        <legend>The location of the guest is:</legend>
+        <div class="pure-control-group">
+            <label for="Latitude">Latitude</label>
+            <input id="Latitude" type="text" placeholder="Latitude" value="{{ latitude }}" readonly>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="Longitude">Longitude</label>
+            <input id="Longitude" type="text" placeholder="Longitude" value="{{ longitude }}" readonly>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="Accuracy">Accuracy</label>
+            <input id="Accuracy" type="text" placeholder="Accuracy" value="{{ accuracy }} m." readonly>
+        </div>
+
+        <div class="pure-control-group">
+            <label for="Accuracy"></label>
+            <button type="button" class="pure-button pure-button-primary" id="conf">Ok</button>
+        </div>
+
+        </div>
+    </fieldset>
+</form>
+
+<form>
+    <input type="hidden" id="latitude" value="{{ latitude }}">
+    <input type="hidden" id="longitude" value="{{ longitude }}">
+    <input type="hidden" name="previousPage" value='' id="prev-page">
+</form>
+
+<script type="application/javascript">
+    $( document ).ready(function() {
+        var lat = $('#latitude').val();
+        var long = $('#longitude').val();
+        $('#main-block').append("<img src='http://maps.googleapis.com/maps/api/staticmap?center=" + lat + "," + long + "&zoom=15&size=700x700&sensor=false'>");
+
+        $('#conf').on('click', function(){
+            location.href = $('#prev-page').val();
+        })
+    });
+</script>
+
+<div id="main-block">
+
+</div>
+<div id="coordinates" style="display: none">
+    <div id="mouse_coords_on_move"></div>
+    <div id="mouse_coords_on_click"></div>
+</div>
+</body>
+
+<style>
+
+</style>

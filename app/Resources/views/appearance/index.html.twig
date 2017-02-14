@@ -1,0 +1,107 @@
+<script type="text/javascript" src="{{ asset('bundles/easyadmin/javascript/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning back">Back</button></div>
+
+<div id="main-block">
+
+    <form class="pure-form pure-form-aligned">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="name">Site name</label>
+                <input id="name" value="{{ site.name }}" type="text" placeholder="Site name" readonly="readonly">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="url">URL</label>
+                <input id="url" type="text" value="{{ site.siteUrl }}" placeholder="URL" readonly="readonly">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="position">Position</label>
+                <input id="position" readonly type="text" placeholder="Position" value="{{ site.positionName }}">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="note">Note</label>
+                <textarea id="note" readonly>{{ site.note }}</textarea>
+            </div>
+
+            <div class="pure-controls">
+
+            </div>
+        </fieldset>
+    </form>
+
+            <form class="pure-form pure-form-aligned" method="post" action="{{ url('homepage')  }}saveCondition">
+                <fieldset>
+                    <legend>Please, select the condition for display popup.</legend>
+                    <div class="pure-control-group">
+                        <label for="si">{{ conditions.SI }}</label>
+                        <input id="si" name="condition" type="radio" placeholder="si" value="SI" {% if site.appearance == 'SI' %} checked {% endif %}>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="sa">{{ conditions.SA }}</label>
+                        <input id="sa" name="condition" type="radio" value="SA" {% if site.appearance == 'SA' %} checked {% endif %}>
+                        <input class="sa" name="SA" type="number" placeholder="default 5 second" {% if site.appearance == 'SA' %} value="{{ site.appValue }}" {% endif %}>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="sv">{{ conditions.SV }}</label>
+                        <input id="sv" type="radio" name="condition" value="SV" {% if site.appearance == 'SV' %} checked {% endif %}>
+                        <input type="number" name="SV" placeholder="default 2 pages" {% if site.appearance == 'SV' %} value="{{ site.appValue }}" {% endif %}>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="sc">{{ conditions.SC }}</label>
+                        <input id="sc" type="radio" name="condition" value="SC" {% if site.appearance == 'SC' %} checked {% endif %}>
+                        <input type="text" name="SC" title="Please, input the full URL with 'http://' in the start ... " placeholder="default All" {% if site.appearance == 'SC' %} value="{{ site.appValue }}" {% endif %}>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="se">{{ conditions.SE }}</label>
+                        <input id="se" type="radio" name="condition" value="SE" {% if site.appearance == 'SE' %} checked {% endif %}>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="sd">{{ conditions.SD }}</label>
+                        <input id="sd" type="radio" name="condition" value="SD" {% if site.appearance == 'SD' %} checked {% endif %}>
+
+
+                        <select name="SD" class="device-type">
+                            <option value="0">None</option>
+                            {% for device in devices %}
+                                <option value="{{ device }}" {% if site.appValue == device %} selected {% endif %}>{{ device }}</option>
+                            {% endfor %}
+                        </select>
+
+                        {#<input type="text" name="SD" placeholder="default All" {% if site.appearance == 'SD' %} value="{{ site.appValue }}" {% endif %}>#}
+                    </div>
+
+                    <div class="pure-control-group">
+                        <label for="so">{{ conditions.SO }}</label>
+                        <input id="so" type="radio" name="condition" value="SO" {% if site.appearance == 'SO' %} checked {% endif %}>
+                    </div>
+
+                    <div class="pure-controls">
+                        <label for="cb" class="pure-checkbox">
+                            <input id="cb" name="action" type="checkbox"> I confirm my action
+                        </label>
+
+                        <button type="submit" class="pure-button pure-button-primary">Save</button>
+                    </div>
+
+                    <div class="pure-control-group">
+                        <input type="hidden" name="previousPage" value='' id="prev-page">
+                        <input type="hidden" name="id" value='{{ site.id }}' id="prev-page">
+                    </div>
+                </fieldset>
+            </form>
+</div>
+
+</body>

@@ -1,0 +1,31 @@
+i {
+    display: block;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 164%;
+    left: 49%;
+    background: url(http://i.imgur.com/lOBxb.png);
+    -webkit-animation: barrelRoll 2s infinite linear;
+    -webkit-animation-play-state: running;
+}
+
+i:last-of-type {
+    top: 177%;
+    left: 50%;
+    -webkit-animation-name: invertBarrelRoll;
+}
+
+div:hover > i {
+    -webkit-animation-play-state: running;
+}
+
+@-webkit-keyframes barrelRoll {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@-webkit-keyframes invertBarrelRoll {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(-360deg); }
+}

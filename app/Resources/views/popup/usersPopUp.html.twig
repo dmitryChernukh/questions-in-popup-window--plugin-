@@ -1,0 +1,91 @@
+<script type="text/javascript" src="{{ asset('app/js/jquery-1.9.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/subsidiary.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/user-pop-up-style.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning btn-back-user-action">Back</button></div>
+
+<div id="main-block">
+
+    <div id="info-block" class="user-info-tsl">
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Info!</strong> You can correct the code and rebuild your popup window!
+        </div>
+
+        <form class="form-horizontal" id="user-popup-container">
+
+            <div class="form-group">
+                <label for="input-stl-3" class="col-sm-2 control-label">Popup name</label>
+                <div class="col-sm-10">
+                    <input class="form-control" name="popupName" value=" {{ popupName }} " id="input-stl-3">
+                    <input type="hidden" value="{{ id }}" name="id" id="user-popup-id">
+                    <input type="hidden" value="{{ previousPage }}" name="previousPage" id="prev-page">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Html code</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control text-style-user" id="inputEmail3" name="htmlCode">{{ htmlCode }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class="col-sm-2 control-label">CSS code</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control text-style-user" id="inputPassword3" name="cssCode">{{ cssCode }}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="input-file-container" class="col-sm-2 control-label">File container</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="{{ cssFile }}" id="input-file-container" readonly name="file">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="btn-group">
+                        <button type="button" data-stl="RB" class="btn btn-primary rebuild-the-page">
+                            Rebuild
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle right-button-style" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#" data-stl="SV" class="save-popup">Save and leave</a>
+                            </li>
+                            <li>
+                                <a href="#" class="rebuild-the-page">Rebuild</a>
+                            </li>
+                            <li>
+                                <a href="#" class="btn-back-user-action">Leave page</a>
+                            </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="#" class="reload-page">Reload page</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="pop-up">
+        {{ htmlCode | raw }}
+    </div>
+
+</div>
+
+</body>
+
+<style>
+    {{ cssCode }}
+</style>
+
+<div class="modal fade" id="modal-b" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"></div>

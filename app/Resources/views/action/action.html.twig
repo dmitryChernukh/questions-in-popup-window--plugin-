@@ -1,0 +1,79 @@
+<script type="text/javascript" src="{{ asset('bundles/easyadmin/javascript/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning back">Back</button></div>
+
+<div id="main-block">
+
+    <form class="pure-form pure-form-aligned" id="save-answer" method="POST" action="{{ url('homepage')  }}saveStep">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="id">ID</label>
+                <input id="id" type="number" name="id" value="{{ answer.id }}" placeholder="ID" readonly>
+            </div>
+            <div class="pure-control-group">
+                <label for="question">Question</label>
+                <input id="question" class="input-fields" type="text" value="{{ questAnswer.question }}" placeholder="Question" readonly>
+            </div>
+            <div class="pure-control-group">
+                <label for="name">Answer</label>
+                <input id="name" class="input-fields" name="answer" value="{{ answer.answer }}" type="text" placeholder="Username">
+            </div>
+
+            <div class="pure-control-group">
+                <label for="note">Note</label>
+                <textarea class="input-fields" name="note" id="note">{{ answer.note }}</textarea>
+            </div>
+
+            <div class="pure-control-group select-type">
+                <label for="ftp" class="pure-checkbox">Please, set up the next step:</label>
+                <div id="ftp" class="selector">
+                    <input id="link" name="identifire" type="radio" value="L" {% if answer.identifire == 'L' %} checked="checked" {% endif %}> Link <br>
+                    <input id="qp" name="identifire" type="radio" value="QP" {% if answer.identifire == 'QP' %} checked="checked" {% endif %}> Question <br>
+                    <input id="rp" name="identifire" type="radio" value="RP" {% if answer.identifire == 'RP' %} checked="checked" {% endif %}> Result PopUp
+                </div>
+            </div>
+            <div class="pure-control-group select-id links-block" {% if answer.identifire == 'L' %} style="display: block" {% endif %}>
+                <label for="note"></label>
+                <select name="StepID-link" class="step-select">
+                    {% for link in links %}
+                    <option value="{{ link.id }}" {% if answer.identifire == 'L' and answer.identifireStepID == link.id %} selected {% endif %}>{{ link.url }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="pure-control-group select-id qp-block" {% if answer.identifire == 'QP' %} style="display: block" {% endif %}>
+                <label for="note"></label>
+                <select name="StepID-qp" class="step-select">
+                    {% for quest in question %}
+                        <option value="{{ quest.id }}" {% if answer.identifire == 'QP' and answer.identifireStepID == quest.id %} selected {% endif %}>{{ quest.question }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="pure-control-group select-id rp-block" {% if answer.identifire == 'RP' %} style="display: block" {% endif %}>
+                <label for="note"></label>
+                <select name="StepID-rp" class="step-select">
+                    {% for resPop in resultPopUp %}
+                        <option value="{{ resPop.id }}" {% if answer.identifire == 'RP' and answer.identifireStepID == resPop.id %} selected {% endif %}>{{ resPop.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="pure-control-group">
+                <input type="hidden" name="previousPage" value='' id="prev-page">
+            </div>
+            <div class="pure-control-group">
+                <label for="foo"></label>
+                <button type="submit" class="pure-button pure-button-primary">Save</button>
+            </div>
+
+        </fieldset>
+    </form>
+
+
+</div>
+
+</body>

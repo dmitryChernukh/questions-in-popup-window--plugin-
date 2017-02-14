@@ -1,0 +1,616 @@
+<script type="text/javascript" src="{{ asset('app/js/jquery-1.9.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/render.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/transition.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/turbotabs.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jqColorPicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/jquery.validate.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/additional-methods.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/admin1.js') }}"></script>
+<script type="text/javascript" src="{{ asset('app/js/subsidiary.js') }}"></script>
+
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('bundles/easyadmin/stylesheet/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/font-awesome.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/bootstrap.min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/pure-min.css') }}" />
+<link type="text/css" rel="stylesheet" media="all" href="{{ asset('app/css/admin.css') }}" />
+<body>
+<div class="head-row"><button type="button" class="btn btn-warning back-button-popup">Back</button></div>
+
+<div id="main-block">
+    <div id="info-block">
+
+        <div class="alert alert-warning alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <strong>Info!</strong>
+            Some attributes will work only when you save / rebuild the changes.
+        </div>
+
+
+        <form class="pure-form pure-form-aligned" enctype="multipart/form-data" action="{{ url('homepage')  }}saveResultForm" method="post" id="set-parameter-form-result">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="id">PopUp ID</label>
+                    <input id="id" type="text" placeholder="Id" name="id" value="{{ id }}" readonly>
+                    <input type="hidden" name="currentPage" value="" id="current-page">
+                </div>
+                <div class="pure-control-group">
+                    <label for="name">Name</label>
+                    <input id="name" type="text" placeholder="Name" name="name" value="{{ name }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="name">MainTitle</label>
+                    <input id="mainTitle" type="text" placeholder="MainTitle" name="mainTitle" value="{{ mainTitle }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="height">Height</label>
+                    <input id="height" type="number" placeholder="number" name="height" value="{{ height }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="width">Width</label>
+                    <input id="width" type="number" name="width" placeholder="width" value="{{ width }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="height">ImageSizeHead</label>
+                    <input id="imageSizeHead" type="number" placeholder="number" name="imageSizeHead" value="{{ imageSizeHead }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="imageMarginBottom">ImageMarginBottom</label>
+                    <input id="imageMarginBottom" type="number" placeholder="number" name="imageMarginBottom" value="{{ imageMarginBottom }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="imageTopMargin">ImageMarginTop</label>
+                    <input id="imageTopMargin" type="number" placeholder="number" name="imageTopMargin" value="{{ imageTopMargin }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="height">ImageSizeBody</label>
+                    <input id="imageSizeBody" type="number" placeholder="number" name="imageSizeBody" value="{{ imageSizeBody }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="bgColor">BGColor</label>
+                    <input class="rgb-select" id="bgColor" type="text" name="bgColor" placeholder="BGColor" value="{{ bgColor }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="buttonColor">ButtonColor</label>
+                    <input class="rgb-select" id="buttonColor" type="text" name="buttonColor" placeholder="buttonColor" value="{{ buttonColor }}">
+                </div>
+
+                <div class="pure-control-group">
+
+                    <label for="shadowColor">Buttons shadow color</label>
+                    <input class="rgb-select" id="shadowColor" type="text" name="shadowColor" placeholder="shadowColor" value="{{ buttonShadow }}">
+                    <span class="string-info">(Changes will take effect after saving the data.)</span>
+                </div>
+
+                <br>
+
+                <div class="pure-control-group">
+                    <label for="image">BorderStyle</label>
+                    <select id="borderStyle" name="borderStyle">
+                        <option value="3" {% if borderStyle.id == 3 %}
+                            selected="selected"
+                                {% endif %}>none</option>
+                        <option value="2" {% if borderStyle.id == 2 %}
+                            selected="selected"
+                                {% endif %}>hidden</option>
+                        <option value="1" {% if borderStyle.id == 1 %}
+                            selected="selected"
+                                {% endif %}>dotted</option>
+                        <option value="4" {% if borderStyle.id == 4 %}
+                            selected="selected"
+                                {% endif %}>dashed</option>
+                        <option value="5" {% if borderStyle.id == 5 %}
+                            selected="selected"
+                                {% endif %}>solid</option>
+                        <option value="6" {% if borderStyle.id == 6 %}
+                            selected="selected"
+                                {% endif %}>double</option>
+                        <option value="7" {% if borderStyle.id == 7 %}
+                            selected="selected"
+                                {% endif %}>groove</option>
+                        <option value="8" {% if borderStyle.id == 8 %}
+                            selected="selected"
+                                {% endif %}>ridge</option>
+                        <option value="9" {% if borderStyle.id == 9 %}
+                            selected="selected"
+                                {% endif %}>inset</option>
+                        <option value="10" {% if borderStyle.id == 10 %}
+                            selected="selected"
+                                {% endif %}>outset</option>
+                    </select>
+                </div>
+                <div class="pure-control-group">
+                    <label for="textColor">TextColor</label>
+                    <input class="rgb-select" id="textColor" type="text" name="textColor" placeholder="textColor" value="{{ textColor }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="borderRadius">BorderRadius</label>
+                    <input class="" id="borderRadius" type="number" name="borderRadius" placeholder="borderRadius" value="{{ borderRadius }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="rating-count" class="col-sm-5 control-label">Please, select the numbers of rating rows</label>
+                    <div class="col-sm-7 rating-area-f edit-rating-area">
+
+                        <select class="form-control" name="rating-count" id="rating-count">
+                            <option value="1" {% if countRating == 1%} selected="selected" {% endif %}>1</option>
+                            <option value="2" {% if countRating == 2%} selected="selected" {% endif %}>2</option>
+                            <option value="3" {% if countRating == 3%} selected="selected" {% endif %}>3</option>
+                        </select>
+                        <input type="hidden" value="{{ countRating }}" id="count-rating-status">
+                        <div>
+                            <div id="RB-1" >
+                                <input value="{{ ratingTextOne }}" id="ratingOne" class="form-control rating-text-element" type="text" name="ratingTextOne" placeholder="Enter the rating text one">
+                                     <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                     <input value="{{ indTextWidthOne }}" name="ratingTextOneWidth" type="number" id="text-one-width" class="form-control additional-width-block">
+                                     <span class="ind-text-class"> (px) - individual text width</span>
+                            </div>
+                            <div id="RB-2" style="display: {% if countRating == 2 or countRating == 3%} block {% elseif countRating == 1 %} none {% endif %};">
+                                <input value="{{ ratingTextTwo }}" id="ratingTwo" class="form-control rating-text-element"  type="text" name="ratingTextTwo" placeholder="Enter the rating text two">
+                                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                    <input value="{{ indTextWidthTwo }}" name="ratingTextTwoWidth" type="number" id="text-two-width" class="form-control additional-width-block">
+                                    <span class="ind-text-class"> (px) - individual text width</span>
+                            </div>
+                            <div id="RB-3" style="display: {% if countRating == 3%} block {% elseif countRating == 1 or countRating == 2%} none {% endif %};">
+                                <input value="{{ ratingTextThree }}" id="ratingThree" class="form-control rating-text-element"  type="text" name="ratingTextThree" placeholder="Enter the rating text three">
+                                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                                    <input value="{{ indTextWidthThree }}" name="ratingTextThreeWidth" type="number" id="text-three-width" class="form-control additional-width-block">
+                                    <span class="ind-text-class"> (px) - individual text width</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="ratingTextSize">RatingTextSize</label>
+                    <input class="" id="ratingTextSize" type="number" name="ratingTextSize" placeholder="ratingTextSize" value="{{ ratingTextSize }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="url">Go to URL</label>
+                        <div class="attr-margin">
+                            <span class="ex-site persist">Example: http://www.testsite.com</span>
+                            <input class="" id="url" type="text" name="url" placeholder="url" value="{{ url }}">
+                        </div>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonText">ButtonText</label>
+                    <input class="" id="buttonText" type="text" name="buttonText" placeholder="buttonText" value="{{ buttonText }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonTextSize">Button Text Size</label>
+                    <input class="" id="buttonTextSize" type="number" name="buttonTextSize" placeholder="buttonTextSize" value="{{ buttonTextSize }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonTopMargin">ButtonTopMargin</label>
+                    <input class="" id="buttonTopMargin" type="number" name="buttonTopMargin" placeholder="buttonTopMargin" value="{{ buttonTopMargin }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="imageLink">Provide the Image link</label>
+                    <input class="" id="imageLink" type="text" name="imageLink" placeholder="imageLink" value="{{ imageLink }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="textContainerFluidMargin">Margin Between Text Blocks</label>
+                    <input class="" id="textContainerFluidMargin" type="number" name="textContainerFluidMargin" placeholder="textContainerFluidMargin" value="{{ textContainerFluidMargin }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="mainPopupPadding">PopupPadding</label>
+                    <input class="" id="mainPopupPadding" type="number" name="mainPopupPadding" placeholder="mainPopupPadding" value="{{ mainPopupPadding }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonTextColour">ButtonTextColour</label>
+                    <input class="rgb-select" id="buttonTextColour" type="text" name="buttonTextColour" placeholder="buttonTextColour" value="{{ buttonTextColour }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="textBlockMessage">TextBlockMessage</label>
+                    <textarea id="textBlockMessage" name="textBlockMessage">{{ textBlockMessage }}</textarea>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="textBlockMessageSize">TextBlockMessageSize</label>
+                    <input class="" id="textBlockMessageSize" type="number" name="textBlockMessageSize" placeholder="textBlockMessageSize" value="{{ textBlockMessageSize }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonWidth">ButtonWidth</label>
+                    <input class="" id="buttonWidth" type="number" name="buttonWidth" placeholder="buttonWidth" value="{{ buttonWidth }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonHeight">ButtonHeight</label>
+                    <input class="" id="buttonHeight" type="number" name="buttonHeight" placeholder="buttonHeight" value="{{ buttonHeight }}">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="buttonHeight">DefineTheBlock: </label>
+
+                    <div class="radio-container">
+
+                        <label for="option-two" class="pure-radio">
+                            <input id="option-two" type="radio" class="radio-selector" name="blockStatus" value="RB" {% if blockStatus == 'RB' %} checked="checked" {% endif %}>
+                            Use rating block
+                        </label>
+                        <label for="option-one" class="pure-radio">
+                            <input id="option-one" type="radio" class="radio-selector" name="blockStatus" value="TB" {% if blockStatus == 'TB' %} checked="checked" {% endif %}>
+                            Use text block
+                        </label>
+                        <label for="option-3" class="pure-radio">
+                            <input id="option-3" type="radio" class="radio-selector" name="blockStatus" value="ZO" {% if blockStatus == 'ZO' %} checked="checked" {% endif %}>
+                            Leave empty
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="borderColour">BorderColour</label>
+                    <input class="rgb-select" id="borderColour" type="text" name="borderColour" placeholder="borderColour" value="{{ borderColour }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="borderWidth">BorderWidth(px)</label>
+                    <input class="" id="borderWidth" type="number" name="borderWidth" placeholder="borderWidth" value="{{ borderWidth }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="mainQuestionTextSize">MainQuestion TextSize(pt)</label>
+                    <input class="" id="mainQuestionTextSize" type="number" name="mainQuestionTextSize" placeholder="mainQuestionTextSize" value="{{ mainTitleTextSize }}">
+                </div>
+                <div class="pure-control-group">
+                    <label for="image">ImageHead / Upload new image.</label>
+                    <input name="delete-image-head" type="checkbox"> Delete head image
+                    <input type="file" id="imageHead" value="Upload-head" name="head-image" class="upload-new-popup-image">
+                    <input type="hidden" value="{{ imageFileHead }}" name="previous-image-head">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="imageBody">ImageBody / Upload new image.</label>
+                    <input name="delete-image-body" type="checkbox"> Delete body image
+                    <input type="file" id="imageBody" value="Upload-head" name="body-image" class="upload-new-popup-image">
+                    <input type="hidden" value="{{ imageFileBody }}" name="previous-image-body">
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="note">Note</label>
+                    <textarea rows="10" id="note" cols="30" name="note">{{ note }}</textarea>
+                </div>
+                <input type="hidden" name="previousPage" value='{{ previousPage }}' id="prev-page">
+            </fieldset>
+            <div class="pure-control-group">
+                <label for="image"></label>
+                <button type="submit" class="pure-button pure-button-primary">Save</button>
+            </div>
+        </form>
+    </div>
+    <div class="pop-up">
+        <div style="margin-left: 90%;"><img class="close-result-pop-up" src="{{ asset('app/system_image/close-button.png')}}"></div>
+        {% if imageFileHead %}
+            <div class="image-container container-for-image" ><img class="header-image" src="/uploads/images/{{ imageFileHead }}"></div>
+        {% endif %}
+        <hr>
+        <div class="main-question">{{ mainTitle }}</div>
+        {% if imageFileBody %}
+            <a href="{{ imageLink }}" target="_blank">
+                <div class="image-container "><img class="body-image" src="/uploads/images/{{ imageFileBody }}"></div>
+            </a>
+
+        {% endif %}
+
+
+        <div class="answer-container" {% if blockStatus == 'RB' %} style="display: block" {% elseif blockStatus == 'TB' or  blockStatus == 'ZO'%} style="display: none" {% endif %}>
+
+            <div class="rating-container container-rating-1"><span id="ratingTextOne">{{ ratingTextOne }}</span>
+                <div class="reviewStars-input" style="margin-top: 2%">
+                    <input id="star-4" type="radio" name="reviewStars"/>
+                    <label title="gorgeous" for="star-4"></label>
+                    <input id="star-3" type="radio" name="reviewStars"/>
+                    <label title="good" for="star-3"></label>
+                    <input id="star-2" type="radio" name="reviewStars"/>
+                    <label title="regular" for="star-2"></label>
+                    <input id="star-1" type="radio" name="reviewStars"/>
+                    <label title="poor" for="star-1"></label>
+                    <input id="star-0" type="radio" name="reviewStars"/>
+                    <label title="bad" for="star-0"></label>
+                </div>
+            </div>
+            <div style="display: none" class="rating-container container-fluid container-rating-2"><span id="ratingTextTwo">{{ ratingTextTwo }}</span>
+                <div class="reviewStars-input-two" style="margin-top: 2%">
+                    <input id="star-41" type="radio" name="reviewStars2"/>
+                    <label title="gorgeous" for="star-41"></label>
+                    <input id="star-31" type="radio" name="reviewStars2"/>
+                    <label title="good" for="star-31"></label>
+                    <input id="star-21" type="radio" name="reviewStars2"/>
+                    <label title="regular" for="star-21"></label>
+                    <input id="star-11" type="radio" name="reviewStars2"/>
+                    <label title="poor" for="star-11"></label>
+                    <input id="star-01" type="radio" name="reviewStars2"/>
+                    <label title="bad" for="star-01"></label>
+                </div>
+            </div>
+            <div style="display: none" class="rating-container container-fluid container-rating-3"><span id="ratingTextThree">{{ ratingTextThree }}</span>
+                <div class="reviewStars-input-two" style="margin-top: 0%">
+                    <input id="star-42" type="radio" name="reviewStars3"/>
+                    <label title="gorgeous" for="star-42"></label>
+                    <input id="star-32" type="radio" name="reviewStars3"/>
+                    <label title="good" for="star-32"></label>
+                    <input id="star-22" type="radio" name="reviewStars3"/>
+                    <label title="regular" for="star-22"></label>
+                    <input id="star-12" type="radio" name="reviewStars3"/>
+                    <label title="poor" for="star-12"></label>
+                    <input id="star-02" type="radio" name="reviewStars3"/>
+                    <label title="bad" for="star-02"></label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-container-fluid" style=" margin: {{ textContainerFluidMargin }} 0 auto;
+        text-align: center; word-wrap: break-word; {% if blockStatus == 'TB' %} display: block; {% elseif blockStatus == 'RB' or  blockStatus == 'ZO'%} display: none; {% endif %}">
+        <pre class="text-fluid-str">{{ textBlockMessage }}</pre>
+        </div>
+
+
+        <a href="{{ url }}" class="button-0"><span class="inner-span-button">{{ buttonText }}</span></a>
+
+    </div>
+</div>
+    <div id="coordinates">
+        <div id="mouse_coords_on_move"></div>
+        <div id="mouse_coords_on_click"></div>
+    </div>
+</body>
+
+<style>
+
+    .text-fluid-str{
+        background-color: inherit;
+        border: none;
+        word-wrap: break-word;
+        text-align: center;
+        color: {{ textColor }};
+        font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+        font-size: {{ textBlockMessageSize }}pt;
+    }
+
+    .button-0 {
+        position: relative;
+        margin: 0 auto;
+        border-radius: 10px;
+        font-family: 'Helvetica', cursive;
+        font-size: 21px;
+        color: {{ buttonTextColour }};
+        text-decoration: none;
+        background-color: {{ buttonColor }};
+        box-shadow: 0 5px {{ buttonShadow }};
+        text-shadow: 0px -1px rgba(113, 110, 109, 0.68);
+        transition: all 0.1s;
+        -webkit-transition: all 0.1s;
+        display: block;
+        height: {{ buttonHeight }}px;
+        width: {{ buttonWidth }}px;
+        text-align: center;
+        margin-top: {{ buttonTopMargin }}px;
+    }
+
+    .inner-span-button{
+        width: 100%;
+        position: absolute;
+        font-size: {{ buttonTextSize }}pt;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .button-0:active {
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .button-0:hover {
+        box-shadow: 0 2px #696e79 !important;
+        transform: translateY(3px);
+
+        text-decoration: none;
+        color: {{ buttonTextColour }};
+    }
+
+    .container-for-image{
+        margin-top: {{ imageTopMargin }}px;
+        margin-bottom: {{ imageMarginBottom }}px;
+    }
+
+    .edit-rating-area{
+        display: block;
+        float: left;
+        margin-right: 55px;
+    }
+
+    .pop-up{
+        height: {{ height }};
+        position: fixed;
+        padding: {{ mainPopupPadding }}px;
+        width: {{ width }};
+        background-color: {{ bgColor }};
+        color: {{ textColor }};
+        border-radius: {{ borderRadius }}px;
+        border: {{ borderWidth }}px {{ borderStyle.type }} {{ borderColour }};
+        margin-left: 40%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.93);
+    }
+    hr {
+        width: 90%;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    .text-container-fluid{
+        font-size: {{ textBlockMessageSize }}pt;
+    }
+    .image-container,.answer-container{
+        width:100%;
+    }
+    .string-info{
+        display: block;
+        font-size: 83%;
+        margin-left: 50px;
+    }
+    .answer-container{
+        margin-top: 9%;
+        height: 17%
+    }
+
+    .header-image{
+        width: inherit;
+        max-width: {{ imageSizeHead }};
+        max-height: {{ imageSizeHead }};
+
+    }
+    .body-image{
+        /*width: inherit;*/
+        max-width: {{ imageSizeBody }};
+        max-height: {{ imageSizeBody }};
+    }
+    .body-image, .header-image{
+        display: block;
+        background-size: contain;
+        margin: 0 auto;
+        padding: 5px;
+    }
+    #ratingTextOne, #ratingTextTwo, #ratingTextThree{
+        font-size: {{ ratingTextSize }}pt;
+    }
+
+    #ratingTextOne{
+        width: {{ indTextWidthOne }}px;
+    }
+
+    #ratingTextTwo{
+        width: {{ indTextWidthTwo }}px;
+    }
+
+    #ratingTextThree{
+        width: {{ indTextWidthThree }}px;
+    }
+
+    .main-question{
+        font-size: {{ mainTitleTextSize }}pt;
+        text-align: center;
+        line-height: 1;
+    }
+    #go-to{
+        height: {{ buttonHeight }};
+        width: {{ buttonWidth }};
+        background-color: {{ buttonColor }};
+        border: none;
+        margin: 0 auto;
+        margin-top: {{ buttonTopMargin }};
+        display: block;
+        color: {{ buttonTextColour }}
+    }
+
+    /*sprite with stars*/
+    .reviewStars-input-two input:checked ~ label, .reviewStars-input-two label,
+    .reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+        background: url('{{ asset('app/system_image/star-image.png') }}') no-repeat;
+    }
+
+    .reviewStars-input input:checked ~ label, .reviewStars-input label,
+    .reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+        background: url('{{ asset('app/system_image/star-image.png') }}') no-repeat;
+    }
+
+    .rating-container{
+        padding-left: 20px;
+        padding-right: 15px;
+    }
+    .container-fluid{
+        margin-top: 10px;
+    }
+
+    .reviewStars-input, .reviewStars-input-two {
+        float: right;
+        overflow: hidden;
+        *zoom: 1;
+    }
+
+    .reviewStars-input input, .reviewStars-input-two input {
+        opacity: 0;
+        position: absolute;
+        /*top: 0;*/
+        z-index: 0;
+    }
+
+    .reviewStars-input input:checked ~ label, .reviewStars-input-two input:checked ~ label {
+        background-position: 0 -18px;
+        height: 18px;
+        width: 20px;
+    }
+
+    .reviewStars-input label, .reviewStars-input-two label {
+        background-position: 0 0;
+        height: 18px;
+        width: 20px;
+        float: right;
+        cursor: pointer;
+        margin-right: 10px;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    .reviewStars-input label:hover, .reviewStars-input label:hover ~ label, .reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+        background-position: 0 -18px;
+        height: 18px;
+        width: 20px;
+    }
+
+    .ex-site{
+        color: #00acd6;
+    }
+    .persist{
+        display: block;
+    }
+    .attr-margin{
+        margin-left: 159px;
+    }
+
+</style>
+
+<script type="application/javascript">
+    $( document ).ready(function() {
+        $('#current-page').val(window.location.href);
+        //-- determine the count of rating rows
+        var ratingCount = $('#count-rating-status').val();
+        function ratingDisplay(ratingCount){
+            if(ratingCount == 1){
+                $('.container-rating-2').hide();
+                $('.container-rating-3').hide();
+            } else if(ratingCount == 2){
+                $('.container-rating-3').hide();
+                $('.container-rating-2').show();
+            } else if (ratingCount == 3){
+                $('.container-rating-3').show();
+                $('.container-rating-2').show();
+            }
+        }
+        ratingDisplay(ratingCount);
+
+        $('#rating-count').on('change', function(){
+            ratingDisplay($(this).val());
+        })
+    })
+
+</script>

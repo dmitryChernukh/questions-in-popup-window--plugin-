@@ -1,0 +1,326 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: "@MainBundle/Resources/config/services.yml" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+    app.path.product_images: /uploads/images
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+
+easy_admin:
+    site_name: 'CRUD <em style="font-size: 80%; color: yellow">Legendcorp.</em>'
+    design:
+            brand_color: 'rgba(26, 188, 156, 0.85)'
+            assets:
+                css:
+                    - 'app/css/additional.css'
+                js:
+                    - 'app/js/rgbSelect.js'
+                    - 'app/js/helperTools.js'
+                    - 'app/js/jqColorPicker.min.js'
+            form_theme: ['VichUploaderBundle:Form:fields.html.twig', 'vertical']
+    entities:
+        User:
+            class: AppBundle\Entity\User
+            edit:
+                fields: ['username', 'email', 'enabled', 'locked', { property: 'plainPassword', type: 'password' }, 'roles']
+            new:
+                fields:
+                    - { property: 'username' }
+                    - { property: 'email', type: 'email', label: 'E-mail address' }
+                    - { property: 'plainPassword', type: 'password' }
+                    - { property: 'enabled'}
+                    - { property: 'locked'}
+                    - { property: 'roles'}
+#        Customer:
+#            class: AppBundle\Entity\Customer
+#            new:
+#                fields: ['user', 'name', 'firstName', 'lastName', 'email', 'phone', 'companyName', 'website']
+#        Question:
+#            class: AppBundle\Entity\Question
+#            label: 'Create new Question'
+#            new:
+#                fields: ['question']
+#            edit:
+#                fields: ['question']
+#            list:
+#                fields:
+#                    - 'id'
+#                    - { property: 'question' }
+#                    - { property: 'answers' }
+#                actions: ['AddAnswer']
+#            show:
+#                fields:
+#                    - 'id'
+#                    - { property: 'question' }
+#                    - { property: 'answers' }
+#        Answers:
+#            class: AppBundle\Entity\Answers
+#            list:
+#                 fields:
+#                    - 'id'
+#                    - { property: 'answer' }
+#                    - { property: 'question', label: 'to Question' }
+#                    - { property: 'note' }
+#                 actions: ['next']
+#            show:
+#                 fields:
+#                    - 'id'
+#                    - { property: 'answer' }
+#                    - { property: 'question', label: 'to Question' }
+#                    - { property: 'note' }
+#                    - { property: 'identifire', label: 'Identifier' }
+#                    - { property: 'identifireStepID', label: 'Identifier ID' }
+#                 actions:
+#                    - { name: 'next', type: 'method', label: 'Set Action'}
+#            form:
+#                 fields:
+#                    - { property: 'answer' }
+#                    - { property: 'question', label: 'to Question' }
+#                    - { property: 'note' }
+#        Links:
+#            class: AppBundle\Entity\Links
+#            list:
+#                 fields:
+#                    - 'id'
+#                    - { property: 'name' }
+#                    - { property: 'url', label: 'URL' }
+#                    - { property: 'note' }
+
+#        Archive:
+#            class: AppBundle\Entity\PopUp
+
+        PopUp:
+            class: AppBundle\Entity\PopUp
+            templates:
+                 list: ':Category:index.html.twig'
+            list:
+                 fields:
+                 - { property: 'name' }
+                 - { property: 'name' }
+                 - { property: 'height', label: 'Height(px)' }
+                 - { property: 'width', label: 'Width(px)' }
+                 - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+                 - { property: 'bgColor', label: 'Background color', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'buttonColor', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'textColor', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'note' }
+                 actions: ['configure']
+            disabled_actions: ['edit', 'delete']
+            show:
+                 fields:
+                 - { property: 'name' }
+                 - { property: 'height', label: 'Height(px)' }
+                 - { property: 'width', label: 'Width(px)' }
+                 - { property: 'image', type: 'image', base_path: %app.path.product_images% }
+                 - { property: 'bgColor', label: 'Background color', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'buttonColor', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'textColor', type_options: {attr: {'class':'rgb-select'} } }
+                 - { property: 'note' }
+                 actions:
+                      - { name: 'preview', type: 'method'}
+            form:
+                 fields:
+                    - { property: 'name' }
+                    - { property: 'height', label: 'Height(px)' }
+                    - { property: 'width', label: 'Width(px)' }
+                    - { property: 'borderRadius', label: 'Border Radius(px)', type: 'number' }
+                    - { property: 'borderColour', label: 'Border Colour', type_options: {attr: {'class':'rgb-select'} }}
+                    - { property: 'borderWidth', label: 'Border Width(px)'}
+                    - { property: 'borderStyle', label: 'Border Style'}
+                    - { property: 'mainQuestionTextSize', label: "Main Text Size(pt)"}
+                    - { property: 'answersTextSize', label: 'Answers Text Size(pt)'}
+#                    - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'bgColor', label: 'Background color', type_options: {attr: {'class':'rgb-select'} } }
+                    - { property: 'buttonColor', type_options: {attr: {'class':'rgb-select'} } }
+                    - { property: 'buttonTextColor', label: 'Button Text Color',  type_options: {attr: {'class':'rgb-select'} }}
+                    - { property: 'textColor', type_options: {attr: {'class':'rgb-select'} } }
+                    - { property: 'note' }
+                    - { property: 'updated' , label: 'Time updated', type: 'number', type_options: { read_only: true }}
+
+#        ResultPopUp:
+#            class: AppBundle\Entity\ResultsPopUp
+#            list:
+#                  fields:
+#                  - { property: 'name' }
+#                  - { property: 'mainTitle', label: 'Main Title' }
+#                  - { property: 'height', label: 'Height(px)' }
+#                  - { property: 'width', label: 'Width(px)' }
+#                  - { property: 'imageFileHead', type: 'image', base_path: %app.path.product_images%, label: 'Head Image' }
+#                  - { property: 'url', label: 'To visit' }
+#                  - { property: 'note', label: 'Note' }
+#                  actions: ['previewResult']
+#            show:
+#                  fields:
+#                  - { property: 'name' }
+#                  - { property: 'height', label: 'Height(px)' }
+#                  - { property: 'width', label: 'Width(px)' }
+#                  - { property: 'mainTitle', label: 'Main Title' }
+#                  - { property: 'imageFileHead', type: 'image', base_path: %app.path.product_images%, label: 'Head Image' }
+#                  - { property: 'bgColor', label: 'Background color', type_options: {attr: {'class':'rgb-select'} } }
+#                  - { property: 'buttonColor', type_options: {attr: {'class':'rgb-select'} } }
+#                  - { property: 'textColor', type_options: {attr: {'class':'rgb-select'} } }
+#                  - { property: 'url', label: 'Follow on' }
+#                  - { property: 'note' }
+#                  actions:
+#                       - { name: 'previewResult', type: 'method', label: 'Preview'}
+#            form:
+#                 fields:
+#                    - { property: 'name' }
+#                    - { property: 'mainTitle', label: 'Main Title' }
+#                    - { property: 'ratingTextOne', label: 'Rating Text One' }
+#                    - { property: 'ratingTextTwo', label: 'Rating Text Two' }
+#                    - { property: 'height', label: 'Height(px)' }
+#                    - { property: 'width', label: 'Width(px)' }
+#                    - { property: 'imageSizeHead', label: 'Image Size - Head(px)' }
+#                    - { property: 'imageSizeBody', label: 'Image Size - Body(px)' }
+#                    - { property: 'borderRadius', label: 'Border Radius(px)', type: 'number' }
+#                    - { property: 'borderColour', label: 'Border Colour', type_options: {attr: {'class':'rgb-select'} }}
+#                    - { property: 'borderWidth', label: 'Border Width(px)'}
+#                    - { property: 'borderStyle', label: 'Border Style'}
+#                    - { property: 'mainTitleTextSize', label: "Main Title Size(pt)"}
+#                    - { property: 'ratingTextSize', label: 'Rating Text Size(pt)'}
+#                    - { property: 'ratingStarSize', label: 'Rating Star Size'}
+#                    - { property: 'head_image', type: 'vich_image', label: 'Head Image' }
+#                    - { property: 'body_image', type: 'vich_image', label: 'Body Image' }
+#                    - { property: 'bgColor', label: 'Background color', type_options: {attr: {'class':'rgb-select'} } }
+#                    - { property: 'buttonColor', type_options: {attr: {'class':'rgb-select'} } }
+#                    - { property: 'buttonText', label: 'Button Text' }
+#                    - { property: 'buttonWidth', label: 'Button Width' }
+#                    - { property: 'buttonHeight', label: 'Button Height' }
+#                    - { property: 'textColor', type_options: {attr: {'class':'rgb-select'} } }
+#                    - { property: 'url', label: 'Follow on' }
+#                    - { property: 'note' }
+#                    - { property: 'updated' , label: 'Time updated', type: 'number', type_options: { read_only: true }}
+#            actions: ['edit', 'new', 'show', 'delete', 'search', 'list']
+#        Site:
+#            class: AppBundle\Entity\Site
+#            list:
+#                 fields:
+#                    - { property: 'name' }
+#                    - { property: 'siteUrl', label: 'URL' }
+#                    - { property: 'popUp', label: 'Site PopUp' }
+#                    - { property: 'question', label: 'First question' }
+#                    - { property: 'enabled' }
+#                 actions: ['appearance']
+#            form:
+#                 fields:
+#                    - { property: 'name' }
+#                    - { property: 'siteUrl' }
+#                    - { property: 'ipAddress', label: 'IP Address' }
+#                    - { property: 'popUpPosition', label: 'Position of the popUp window.(At the site page)'}
+#                    - { property: 'popUp', label: 'Site PopUp' }
+#                    - { property: 'note' }
+#                    - { property: 'question', label: 'First Question' }
+#                    - { property: 'enabled' }
+        Guest:
+            class: AppBundle\Entity\Guest
+            form:
+                 fields:
+                    - { property: 'name' }
+                    - { property: 'ip_address', type_options: { read_only: true }}
+                    - { property: 'browser_name', type_options: { read_only: true }}
+                    - { property: 'browser_code_name', type_options: { read_only: true }}
+                    - { property: 'last_connect', type_options: { read_only: true }}
+                    - { property: 'latitude', type_options: { read_only: true }}
+                    - { property: 'longitude', type_options: { read_only: true }}
+                    - { property: 'accuracy', type_options: { read_only: true }}
+                    - { property: 'local_identifire', type_options: { read_only: true }}
+                    - { property: 'enabled'}
+                    - { property: 'note'}
+            list:
+                 fields:
+                    - { property: 'name' }
+                    - { property: 'ip_address' }
+                    - { property: 'browser_name' }
+                    - { property: 'browser_code_name' }
+                    - { property: 'last_connect' }
+                    - { property: 'enabled' }
+                 actions: ['map']
+            disabled_actions: ['new']
+        Rating:
+            class: AppBundle\Entity\Rating
+            list:
+                 fields:
+                    - { property: 'site_url' }
+                    - { property: 'guest_ip' }
+                    - { property: 'rating_one' }
+                    - { property: 'rating_two' }
+                    - { property: 'question_text', label : 'PopUp question text' }
+                    - { property: 'response_time' }
+            disabled_actions: ['new', 'edit']
+vich_uploader:
+    db_driver: orm
+    mappings:
+            product_images:
+                uri_prefix:         %app.path.product_images%
+                upload_destination: %kernel.root_dir%/../web/uploads/images
+
+services:
+    fos_user.doctrine_registry:
+        alias: doctrine

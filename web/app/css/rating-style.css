@@ -1,0 +1,86 @@
+/*sprite with stars*/
+.reviewStars-input-two input:checked ~ label, .reviewStars-input-two label,
+.reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+    background: url(../../app/system_image/star-image.png) no-repeat;
+}
+
+.reviewStars-input input:checked ~ label, .reviewStars-input label,
+.reviewStars-input label:hover, .reviewStars-input label:hover ~ label {
+    background: url(../../app/system_image/star-image.png) no-repeat;
+}
+
+.rating-container{
+    padding-left: 20px;
+    padding-right: 15px;
+}
+.container-fluid{
+    margin-top: 10px;
+}
+
+.reviewStars-input, .reviewStars-input-two {
+    float: right;
+    overflow: hidden;
+    *zoom: 1;
+}
+
+.reviewStars-input input, .reviewStars-input-two input {
+    opacity: 0;
+    position: absolute;
+    /*top: 0;*/
+    z-index: 0;
+}
+
+.reviewStars-input input:checked ~ label, .reviewStars-input-two input:checked ~ label {
+    background-position: 0 -18px;
+    height: 18px;
+    width: 20px;
+}
+
+.reviewStars-input label, .reviewStars-input-two label {
+    background-position: 0 0;
+    height: 18px;
+    width: 20px;
+    float: right;
+    cursor: pointer;
+    margin-right: 10px;
+
+    position: relative;
+    z-index: 1;
+}
+
+.reviewStars-input label:hover, .reviewStars-input label:hover ~ label, .reviewStars-input-two label:hover, .reviewStars-input-two label:hover ~ label {
+    background-position: 0 -18px;
+    height: 18px;
+    width: 20px;
+}
+
+.button-0 {
+    position: relative;
+    margin: 0 auto;
+    border-radius: 10px;
+    font-family: 'Helvetica', cursive;
+    font-size: 21px;
+    text-decoration: none;
+    text-shadow: 0px -1px rgba(113, 110, 109, 0.68);
+    transition: all 0.1s;
+    -webkit-transition: all 0.1s;
+    display: block;
+    text-align: center;
+}
+
+.inner-span-button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.button-0:active {
+    color: #fff;
+    text-decoration: none;
+}
+
+.button-0:hover {
+    transform: translateY(3px);
+    box-shadow: 0 2px #696e79 !important;
+    text-decoration: none;
+}

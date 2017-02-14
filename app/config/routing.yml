@@ -1,0 +1,86 @@
+main:
+    resource: "@MainBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+test_show:
+    path:      /test/action
+    defaults:  { _controller: MainBundle:Default:core }
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+easy_admin_bundle:
+    resource: "@AppBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+technic_info:
+    path:      /core/php_data
+    defaults:  { _controller: AppBundle:API:processing }
+    methods:  [POST, OPTIONS]
+connection:
+    path:      /core/main_processor
+    defaults:  { _controller: AppBundle:API:core }
+    methods:  [POST, OPTIONS]
+set_coordinate:
+    path:      /core/coordinate
+    defaults:  { _controller: AppBundle:API:coordinate }
+    methods:  [POST, OPTIONS]
+set_rating:
+    path:      /core/rating
+    defaults:  { _controller: AppBundle:API:rating }
+    methods:  [POST, OPTIONS]
+blog_show:
+    path:      /blog/{slug}
+    defaults:  { _controller: AppBundle:Router:show }
+test_show:
+    path:      /test/action
+    defaults:  { _controller: MainBundle:Default:core }
+start_preview_mode:
+    path:      /core/activate
+    defaults:  { _controller: AppBundle:API:previewMode  }
+    methods:  [POST, OPTIONS]
+next_action:
+    path:      /core/processing
+    defaults:  { _controller: AppBundle:API:corePreview }
+    methods:  [POST, OPTIONS]
+result_popup:
+    path:      /view/resultPopup
+    defaults:  { _controller: AppBundle:Admin:showResultPopup }
+    methods:  [GET, POST]
+add_to_popup:
+    path:      /addSiteToPopup
+    defaults:  { _controller: AppBundle:Admin:addSiteToPopup }
+    methods:  [GET, POST]
+update_site:
+    path:      /saveSiteChanges
+    defaults:  { _controller: AppBundle:Admin:saveSiteChanges }
+    methods:  [GET, POST]
+remove_site:
+    path:      /removeCurrentSite
+    defaults:  { _controller: AppBundle:Admin:removeCurrentSite }
+    methods:  [GET, POST]
+get_list_sites:
+    path:      /getListOfSites
+    defaults:  { _controller: AppBundle:Admin:getListOfSites }
+    methods:  [GET, POST]
+clone_us_result:
+    path:      /cloneAsResult
+    defaults:  { _controller: AppBundle:Admin:cloneAsResult }
+    methods:  [GET, POST]
+send_to_sleep:
+    path:      /sendToSleep
+    defaults:  { _controller: AppBundle:Form:sendToSleep }
+    methods:  [GET, POST]
+get_prev_action:
+    path:      /getPreviewPopUp
+    defaults:  { _controller: AppBundle:API:getPreviewPopUp }
+    methods:  [GET, POST]
+get_active_popup:
+    path:      /getActivePopUp
+    defaults:  { _controller: AppBundle:API:getActivePopUp }
+    methods:  [GET, POST]
+go_to_archive:
+    path:      /view/archiveContainer
+    defaults:  { _controller: AppBundle:Admin:goToArchive }
+    methods:  [GET, POST]
